@@ -32,7 +32,7 @@ namespace MyBot
             }));
 
             int offset = 0;
-
+            
             while (true)
             {
                 try
@@ -55,7 +55,7 @@ namespace MyBot
                     var text = up.Message.Text.ToLower();
                     var from = up.Message.From;
                     var chatId = up.Message.Chat.Id;
-
+                    
                     if (text.Contains("/start"))
                     {
                         StringBuilder sb = new StringBuilder();
@@ -76,6 +76,23 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
+                    else if (text.Contains("/contactus"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("شماره تماس: 09035170373");
+                        sb.AppendLine("اینستاگرام: instagram.com/mr__amoori");
+                        sb.AppendLine("🖥 @mramoori_bot");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("/address"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("سایت: yek.link/mrx10");
+                        sb.AppendLine("🖥 @mramoori_bot");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+                    
                 }
 
             }
@@ -133,6 +150,14 @@ namespace MyBot
         {
             if (swBtn_StartOrStop.Value==true)
             {
+                if (txt_Token.Text=="")
+                {
+                    MessageBox.Show("توکن خالی است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    swBtn_StartOrStop.Value = false;
+                    botThread.Abort();
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
+                }
                 Token = txt_Token.Text;
                 botThread = new Thread(new ThreadStart(runBot));
                 botThread.Start();
