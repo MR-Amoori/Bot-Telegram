@@ -121,6 +121,10 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
+                    dgvReport.Invoke(new Action(() =>
+                    {
+                        dgvReport.Rows.Add(chatId,from.Username,text,up.Message.MessageId,up.Message.Date.ToString("yyyy/MM/dd - HH:mm:ss"));
+                    }));
 
                 }
             }

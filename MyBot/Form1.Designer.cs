@@ -169,11 +169,10 @@
             this.dgvReport.AllowUserToDeleteRows = false;
             this.dgvReport.AllowUserToResizeColumns = false;
             this.dgvReport.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dgvReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReport.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -200,30 +199,39 @@
             // 
             // ChatId
             // 
+            this.ChatId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ChatId.HeaderText = "Chat ID";
             this.ChatId.Name = "ChatId";
             this.ChatId.ReadOnly = true;
+            this.ChatId.Width = 69;
             // 
             // UserName
             // 
+            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.UserName.HeaderText = "User Name";
             this.UserName.Name = "UserName";
             this.UserName.ReadOnly = true;
+            this.UserName.Width = 84;
             // 
             // Command
             // 
+            this.Command.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Command.HeaderText = "Command";
             this.Command.Name = "Command";
             this.Command.ReadOnly = true;
+            this.Command.Width = 79;
             // 
             // MessageId
             // 
+            this.MessageId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.MessageId.HeaderText = "Message ID";
             this.MessageId.Name = "MessageId";
             this.MessageId.ReadOnly = true;
+            this.MessageId.Width = 88;
             // 
             // Date
             // 
+            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Date.HeaderText = "Date";
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
