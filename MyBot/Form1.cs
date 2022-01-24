@@ -12,6 +12,8 @@ using Telegram.Bot;
 
 namespace MyBot
 {
+
+
     public partial class Form1 : Form
     {
         /// <summary>
@@ -21,10 +23,12 @@ namespace MyBot
         private Thread botThread;
         private TelegramBotClient bot;
         private Telegram.Bot.Types.Update[] update;
-           
+
         /// <summary>
         /// Run Bot
         /// </summary>
+        #region StartBot
+
         void runBot()
         {
             bot = new TelegramBotClient(Token);
@@ -46,6 +50,12 @@ namespace MyBot
                 catch (AggregateException)
                 {
                     MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    swBtn_StartOrStop.Invoke(new Action(() =>
+                    {
+                        swBtn_StartOrStop.Value = false;
+                    }));
+                    txt_Token.Enabled = true;
                     botThread.Abort();
                 }
 
@@ -81,11 +91,17 @@ namespace MyBot
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("Mohammadreza Amoori 👤");
+                        sb.AppendLine("");
                         sb.AppendLine(".NET Developer (C#) 👨🏻‍💻");
+                        sb.AppendLine("");
                         sb.AppendLine("Phone: 09035170373 📞");
+                        sb.AppendLine("");
                         sb.AppendLine("Resume: yek.link/mrx10 🌐");
+                        sb.AppendLine("");
                         sb.AppendLine("Instagram: instagram.com/mr__amoori 📡");
+                        sb.AppendLine("");
                         sb.AppendLine("Telegram: @Doitik 🚀");
+                        sb.AppendLine("");
                         sb.AppendLine("Email: Mohamad.reza.amoori99@gmail.com 📧");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
@@ -97,16 +113,19 @@ namespace MyBot
                     /// </summary>
                     else if (text.Contains("/help"))
                     {
-                        StringBuilder sb=new StringBuilder();
+                        StringBuilder sb = new StringBuilder();
                         sb.AppendLine();
                         sb.AppendLine();
                         sb.AppendLine();
                         sb.AppendLine();
-                        bot.SendTextMessageAsync(chatId,sb.ToString());
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
+
+
                 }
             }
         }
+        #endregion StartBot
 
         public Form1()
         {
@@ -145,21 +164,22 @@ namespace MyBot
                 {
                     MessageBox.Show("توکن خالی است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     swBtn_StartOrStop.Value = false;
-                    lbl_Status.Text = "Offline";
-                    lbl_Status.ForeColor = Color.Red;
                 }
 
-                Token = txt_Token.Text;
-                botThread = new Thread(new ThreadStart(runBot));
-                botThread.Start();
-
-                if (botThread != null)
+                if (txt_Token.Text != "")
                 {
                     txt_Token.Enabled = false;
+                    Token = txt_Token.Text;
+                    botThread = new Thread(new ThreadStart(runBot));
+                    botThread.Start();
                 }
                 else if (botThread == null)
                 {
                     MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    swBtn_StartOrStop.Invoke(new Action(() =>
+                    {
+                        swBtn_StartOrStop.Value = false;
+                    }));
                     txt_Token.Enabled = true;
                 }
             }
@@ -170,8 +190,11 @@ namespace MyBot
 
                 if (botThread == null)
                 {
-                    lbl_Status.Text = "Offline";
-                    lbl_Status.ForeColor = Color.Red;
+                    lbl_Status.Invoke(new Action(() =>
+                    {
+                        lbl_Status.Text = "Offline";
+                        lbl_Status.ForeColor = Color.Red;
+                    }));
                 }
                 else
                 {
