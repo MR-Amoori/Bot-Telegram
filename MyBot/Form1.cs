@@ -21,6 +21,10 @@ namespace MyBot
         private Thread botThread;
         private TelegramBotClient bot;
         private Telegram.Bot.Types.Update[] update;
+           
+        /// <summary>
+        /// Run Bot
+        /// </summary>
         void runBot()
         {
             bot = new TelegramBotClient(Token);
@@ -32,7 +36,7 @@ namespace MyBot
             }));
 
             int offset = 0;
-            
+
             while (true)
             {
                 try
@@ -55,46 +59,52 @@ namespace MyBot
                     var text = up.Message.Text.ToLower();
                     var from = up.Message.From;
                     var chatId = up.Message.Chat.Id;
-                    
+
+                    /// <summary>
+                    /// /start Command
+                    /// </summary>
                     if (text.Contains("/start"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine($"خوش آمدید ♥ {from.Username}");
-                        sb.AppendLine("میتوانید از امکاناتی که این بات در اختیار شما قرار میدهد استفاده کنید");
-                        sb.AppendLine("درباره ما: /AboutUs");
-                        sb.AppendLine("تماس با ما: /ContactUs");
-                        sb.AppendLine("آدرس ما: /Address");
-                        sb.AppendLine("🖥 @mramoori_bot");
+                        sb.AppendLine($"سلام {from.FirstName} خوش آمدید 🌹");
+                        sb.AppendLine("درباره برنامه نویس: /AboutUs");
+                        sb.AppendLine("راهنما: /Help");
+                        sb.AppendLine("");
+                        sb.AppendLine("🤖 @mramoori_bot 🤖");
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
+                    /// <summary>
+                    /// /AboutUs Command
+                    /// </summary>
                     else if (text.Contains("/aboutus"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("محمدرضا عموری هستم برنامه نویس دات نت (#C)");
-                        sb.AppendLine("🖥 @mramoori_bot");
+                        sb.AppendLine("Mohammadreza Amoori 👤");
+                        sb.AppendLine(".NET Developer (C#) 👨🏻‍💻");
+                        sb.AppendLine("Phone: 09035170373 📞");
+                        sb.AppendLine("Resume: yek.link/mrx10 🌐");
+                        sb.AppendLine("Instagram: instagram.com/mr__amoori 📡");
+                        sb.AppendLine("Telegram: @Doitik 🚀");
+                        sb.AppendLine("Email: Mohamad.reza.amoori99@gmail.com 📧");
+                        sb.AppendLine("");
+                        sb.AppendLine("🤖 @mramoori_bot 🤖");
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
-                    else if (text.Contains("/contactus"))
+                    ///<summary>
+                    /// /Help Command
+                    /// </summary>
+                    else if (text.Contains("/help"))
                     {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("شماره تماس: 09035170373");
-                        sb.AppendLine("اینستاگرام: instagram.com/mr__amoori");
-                        sb.AppendLine("🖥 @mramoori_bot");
-                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb=new StringBuilder();
+                        sb.AppendLine();
+                        sb.AppendLine();
+                        sb.AppendLine();
+                        sb.AppendLine();
+                        bot.SendTextMessageAsync(chatId,sb.ToString());
                     }
-
-                    else if (text.Contains("/address"))
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("سایت: yek.link/mrx10");
-                        sb.AppendLine("🖥 @mramoori_bot");
-                        bot.SendTextMessageAsync(chatId, sb.ToString());
-                    }
-                    
                 }
-
             }
         }
 
@@ -103,88 +113,74 @@ namespace MyBot
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Load Form
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Closinng Form
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (botThread!=null)
+            if (botThread != null)
             {
                 botThread.Abort();
             }
-            
-        }
-        /*
-        private void btn_Start_Click(object sender, EventArgs e)
-        {
 
-            Token = txt_Token.Text;
-            botThread = new Thread(new ThreadStart(runBot));
-            botThread.Start();
         }
-        private void btn_Stop_Click(object sender, EventArgs e)
-        {
-            if (txt_Token.Text == "")
-            {
-                MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (botThread == null)
-                {
-                    MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    botThread.Abort();
-                    lbl_Status.Text = "Offline";
-                    lbl_Status.ForeColor = Color.Red;
-                }
 
-            }
-        }
-        */ // ***********
+        /// <summary>
+        /// Buttun Start And Stop
+        /// </summary>
         private void swBtn_StartOrStop_ValueChanged(object sender, EventArgs e)
         {
-            if (swBtn_StartOrStop.Value==true)
-            {
-                if (txt_Token.Text=="")
-                {
-                    MessageBox.Show("توکن خالی است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    swBtn_StartOrStop.Value = false;
-                    botThread.Abort();
-                    lbl_Status.Text = "Offline";
-                    lbl_Status.ForeColor = Color.Red;
-                }
-                Token = txt_Token.Text;
-                botThread = new Thread(new ThreadStart(runBot));
-                botThread.Start();
-            }
-
-            else if (true)
+            // Start
+            if (swBtn_StartOrStop.Value == true)
             {
                 if (txt_Token.Text == "")
                 {
-                    MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("توکن خالی است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    swBtn_StartOrStop.Value = false;
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
                 }
-                else
-                {
-                    if (botThread == null)
-                    {
-                        MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        botThread.Abort();
-                        lbl_Status.Text = "Offline";
-                        lbl_Status.ForeColor = Color.Red;
-                    }
 
+                Token = txt_Token.Text;
+                botThread = new Thread(new ThreadStart(runBot));
+                botThread.Start();
+
+                if (botThread != null)
+                {
+                    txt_Token.Enabled = false;
+                }
+                else if (botThread == null)
+                {
+                    MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txt_Token.Enabled = true;
                 }
             }
 
+            // Stop
+            else if (swBtn_StartOrStop.Value == false)
+            {
+
+                if (botThread == null)
+                {
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
+                }
+                else
+                {
+                    txt_Token.Enabled = true;
+                    botThread.Abort();
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }
