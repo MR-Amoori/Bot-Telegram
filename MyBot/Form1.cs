@@ -13,6 +13,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using System.IO;
+using Telegram.Bot.Types.InlineKeyboardButtons;
 
 namespace MyBot
 {
@@ -138,12 +139,27 @@ namespace MyBot
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
 
-                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
-                        KeyboardButton[] row1 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
-                        rkm.Keyboard = new KeyboardButton[][] { row1 };
+                        InlineKeyboardMarkup inline = new InlineKeyboardMarkup();
 
+                        InlineKeyboardUrlButton[] row2 =
+                        {
+                            new InlineKeyboardUrlButton("🌐 رزومه 🌐","https://yek.link/mrx10")
+                        };
 
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, rkm);
+                        InlineKeyboardUrlButton[] row3 =
+                        {
+                            new InlineKeyboardUrlButton("📡 اینستاگرام 📡","https://instagram.com/mr__amoori"),
+                            new InlineKeyboardUrlButton("🚀 تلگرام 🚀","https://t.me/doitik"),
+                        };
+
+                        InlineKeyboardUrlButton[] row4 =
+                        {
+                            new InlineKeyboardUrlButton("📧 ایمیل 📧", "Mohamad.reza.amoori99@gmail.com")
+                        };
+
+                        inline.InlineKeyboard = new InlineKeyboardUrlButton[][] { row2,row3,row4 };
+
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, inline) ;
                     }
 
                     ///<summary>
@@ -357,7 +373,7 @@ namespace MyBot
                     //InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                     //bot.SendPhotoAsync(chatId, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
                     FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
-                    bot.SendPhotoAsync(chatId, new FileToSend("Bot.mp4", imageFile), txt_Message.Text);
+                    bot.SendVideoAsync(chatId, new FileToSend("Bot.mp4", imageFile), default,default,default,txt_Message.Text);
                 }
                 catch (ArgumentException)
                 {
