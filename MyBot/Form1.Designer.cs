@@ -54,10 +54,16 @@
             this.btn_SendPhoto = new DevComponents.DotNetBar.ButtonX();
             this.btn_SendVideo = new DevComponents.DotNetBar.ButtonX();
             this.btn_DelPath = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txt_Channel = new System.Windows.Forms.TextBox();
+            this.btn_SendMessageToChannel = new DevComponents.DotNetBar.ButtonX();
+            this.btn_SendPhotoToChannel = new DevComponents.DotNetBar.ButtonX();
+            this.btn_SendVideoToChannel = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupPanel1
@@ -261,6 +267,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.btn_SendVideo);
             this.groupBox1.Controls.Add(this.btn_SendPhoto);
             this.groupBox1.Controls.Add(this.btn_DelPath);
@@ -391,6 +398,67 @@
             this.btn_DelPath.UseVisualStyleBackColor = true;
             this.btn_DelPath.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn_SendVideoToChannel);
+            this.groupBox2.Controls.Add(this.btn_SendPhotoToChannel);
+            this.groupBox2.Controls.Add(this.btn_SendMessageToChannel);
+            this.groupBox2.Controls.Add(this.txt_Channel);
+            this.groupBox2.Location = new System.Drawing.Point(12, 110);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(571, 52);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Channel";
+            // 
+            // txt_Channel
+            // 
+            this.txt_Channel.BackColor = System.Drawing.SystemColors.Info;
+            this.txt_Channel.Enabled = false;
+            this.txt_Channel.Location = new System.Drawing.Point(254, 20);
+            this.txt_Channel.Name = "txt_Channel";
+            this.txt_Channel.Size = new System.Drawing.Size(311, 21);
+            this.txt_Channel.TabIndex = 0;
+            // 
+            // btn_SendMessageToChannel
+            // 
+            this.btn_SendMessageToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendMessageToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendMessageToChannel.Enabled = false;
+            this.btn_SendMessageToChannel.Location = new System.Drawing.Point(170, 20);
+            this.btn_SendMessageToChannel.Name = "btn_SendMessageToChannel";
+            this.btn_SendMessageToChannel.Size = new System.Drawing.Size(78, 21);
+            this.btn_SendMessageToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendMessageToChannel.TabIndex = 1;
+            this.btn_SendMessageToChannel.Text = "Send Message";
+            this.btn_SendMessageToChannel.Click += new System.EventHandler(this.btn_SendMessageToChannel_Click);
+            // 
+            // btn_SendPhotoToChannel
+            // 
+            this.btn_SendPhotoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendPhotoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendPhotoToChannel.Enabled = false;
+            this.btn_SendPhotoToChannel.Location = new System.Drawing.Point(8, 20);
+            this.btn_SendPhotoToChannel.Name = "btn_SendPhotoToChannel";
+            this.btn_SendPhotoToChannel.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendPhotoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendPhotoToChannel.TabIndex = 1;
+            this.btn_SendPhotoToChannel.Text = "Photo";
+            this.btn_SendPhotoToChannel.Click += new System.EventHandler(this.btn_SendPhotoToChannel_Click);
+            // 
+            // btn_SendVideoToChannel
+            // 
+            this.btn_SendVideoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendVideoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendVideoToChannel.Enabled = false;
+            this.btn_SendVideoToChannel.Location = new System.Drawing.Point(89, 20);
+            this.btn_SendVideoToChannel.Name = "btn_SendVideoToChannel";
+            this.btn_SendVideoToChannel.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendVideoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendVideoToChannel.TabIndex = 1;
+            this.btn_SendVideoToChannel.Text = "Video";
+            this.btn_SendVideoToChannel.Click += new System.EventHandler(this.btn_SendVideoToChannel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +482,8 @@
             this.panelEx1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -443,6 +513,11 @@
         private DevComponents.DotNetBar.ButtonX btn_SendVideo;
         private DevComponents.DotNetBar.ButtonX btn_SendPhoto;
         private System.Windows.Forms.Button btn_DelPath;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private DevComponents.DotNetBar.ButtonX btn_SendVideoToChannel;
+        private DevComponents.DotNetBar.ButtonX btn_SendPhotoToChannel;
+        private DevComponents.DotNetBar.ButtonX btn_SendMessageToChannel;
+        private System.Windows.Forms.TextBox txt_Channel;
     }
 }
 

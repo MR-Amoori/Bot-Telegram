@@ -11,7 +11,8 @@ using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InputFiles;
+using Telegram.Bot.Types;
+using System.IO;
 
 namespace MyBot
 {
@@ -38,7 +39,7 @@ namespace MyBot
         /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
-            mainKeyboardMarkup = new ReplyKeyboardMarkup("Main");
+            mainKeyboardMarkup = new ReplyKeyboardMarkup();
             KeyboardButton[] row1 = { new KeyboardButton("📒 " + "راهنما" + " 📒") };
             KeyboardButton[] row2 = { new KeyboardButton("👨🏻‍💻 " + "درباره برنامه نویس" + " 👨🏻‍💻") };
             mainKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
@@ -64,6 +65,10 @@ namespace MyBot
                 btn_SendPhoto.Enabled = true;
                 btn_SendVideo.Enabled = true;
                 btn_DelPath.Enabled = true;
+                txt_Channel.Enabled = true;
+                btn_SendMessageToChannel.Enabled = true;
+                btn_SendPhotoToChannel.Enabled = true;
+                btn_SendVideoToChannel.Enabled = true;
             }));
 
             int offset = 0;
@@ -108,7 +113,7 @@ namespace MyBot
                         sb.AppendLine("راهنما : /Help");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, 0, default, mainKeyboardMarkup);
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
 
                     /// <summary>
@@ -133,11 +138,12 @@ namespace MyBot
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
 
-                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup("Back");
+                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
                         KeyboardButton[] row1 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         rkm.Keyboard = new KeyboardButton[][] { row1 };
 
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, default, default, rkm);
+
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, rkm);
                     }
 
                     ///<summary>
@@ -148,12 +154,12 @@ namespace MyBot
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("حوضه راهنمایی را مشخص کنید.");
 
-                        ReplyKeyboardMarkup HelpKeyboardMarkup = new ReplyKeyboardMarkup("Help");
+                        ReplyKeyboardMarkup HelpKeyboardMarkup = new ReplyKeyboardMarkup();
                         KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "دستورات اولیه" + " 🔧"), new KeyboardButton("hele") };
                         KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         HelpKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
 
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, false, false, 0, false, HelpKeyboardMarkup);
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, HelpKeyboardMarkup);
                     }
 
                     ///<summary>
@@ -166,7 +172,7 @@ namespace MyBot
                         sb.AppendLine("از منوی پایین انتخاب کنید " + "👇🏻");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, 0, default, mainKeyboardMarkup);
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
 
 
@@ -180,7 +186,7 @@ namespace MyBot
                         sb.AppendLine("از منوی پایین انتخاب کنید " + "👇🏻");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, 0, default, mainKeyboardMarkup);
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
 
                     ///<summary>
@@ -254,6 +260,10 @@ namespace MyBot
                 btn_SendPhoto.Enabled = false;
                 btn_SendVideo.Enabled = false;
                 btn_DelPath.Enabled = false;
+                txt_Channel.Enabled = false;
+                btn_SendMessageToChannel.Enabled = false;
+                btn_SendPhotoToChannel.Enabled = false;
+                btn_SendVideoToChannel.Enabled = false;
 
                 if (botThread == null)
                 {
@@ -286,7 +296,6 @@ namespace MyBot
             {
                 int chatID = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
                 bot.SendTextMessageAsync(chatID, txt_Message.Text, ParseMode.Html);
-                txt_Message.Text = "";
             }
         }
 
@@ -317,8 +326,13 @@ namespace MyBot
                 try
                 {
                     int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
-                    InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+
+                    /*   InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                     bot.SendPhotoAsync(chatId, new InputOnlineFile(imageFile.Content, "Bot.jpg"), txt_Message.Text, ParseMode.Html);
+                */
+                    System.IO.FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                    bot.SendPhotoAsync(chatId, new FileToSend("Bot.png", imageFile), txt_Message.Text);
+
                 }
                 catch (ArgumentException)
                 {
@@ -340,8 +354,10 @@ namespace MyBot
                 try
                 {
                     int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
-                    InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
-                    bot.SendPhotoAsync(chatId, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
+                    //InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                    //bot.SendPhotoAsync(chatId, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
+                    FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                    bot.SendPhotoAsync(chatId, new FileToSend("Bot.mp4", imageFile), txt_Message.Text);
                 }
                 catch (ArgumentException)
                 {
@@ -367,7 +383,44 @@ namespace MyBot
         /// <param name="e"></param>
         private void btn_About_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Mohammad Reza Amoori  👤 \n.NET Developer (C#)  👨🏻‍💻 \nPhone: 09035170373  📞 \nResume: yek.link/mrx10  🌐 \nInstagram: instagram.com/mr__amoori  📡 \nTelegram: @Doitik  🚀 \nEmail: Mohamad.reza.amoori99@gmail.com  📧", "Developer information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Mohammad Reza Amoori  👤 \n.NET Developer (C#)  👨🏻‍💻 \nPhone: 09035170373  📞 \nResume: yek.link/mrx10  🌐 \nInstagram: instagram.com/mr__amoori  📡 \nTelegram: @Doitik  🚀 \nEmail: Mohamad.reza.amoori99@gmail.com  📧", "Developer information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// Send Message To Channel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SendMessageToChannel_Click(object sender, EventArgs e)
+        {
+            bot.SendTextMessageAsync(txt_Channel.Text, txt_Message.Text, ParseMode.Html);
+        }
+
+        /// <summary>
+        /// Send Video To Channel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SendVideoToChannel_Click(object sender, EventArgs e)
+        {
+            //InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+            //bot.SendPhotoAsync(txt_Channel.Text, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
+            FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+            bot.SendVideoAsync(txt_Channel.Text, new FileToSend("Bot.mp4", imageFile), default, default, default, txt_Message.Text);
+        }
+
+        /// <summary>
+        /// Send Photo To Channel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SendPhotoToChannel_Click(object sender, EventArgs e)
+        {
+            //InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+            //bot.SendPhotoAsync(txt_Channel.Text, new InputOnlineFile(imageFile.Content, "Bot.jpg"), txt_Message.Text, ParseMode.Html);
+
+            FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+            bot.SendPhotoAsync(txt_Channel.Text, new FileToSend("Bot.png", imageFile), txt_Message.Text);
         }
     }
 }
