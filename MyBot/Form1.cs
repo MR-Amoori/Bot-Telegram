@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InputFiles;
 
 namespace MyBot
 {
@@ -55,6 +57,13 @@ namespace MyBot
             {
                 lbl_Status.Text = "Online";
                 lbl_Status.ForeColor = Color.LightGreen;
+                txt_Message.Enabled = true;
+                txt_FilePath.Enabled = true;
+                btn_Send.Enabled = true;
+                btn_SelectFile.Enabled = true;
+                btn_SendPhoto.Enabled = true;
+                btn_SendVideo.Enabled = true;
+                btn_DelPath.Enabled = true;
             }));
 
             int offset = 0;
@@ -154,13 +163,11 @@ namespace MyBot
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("به منوی اصلی بازگشتید" + " ◀️");
-                        sb.AppendLine(" از منوی پایین انتخاب کنید " + "👇🏻");
+                        sb.AppendLine("از منوی پایین انتخاب کنید " + "👇🏻");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, 0, default, mainKeyboardMarkup);
                     }
-
-
 
 
                     ///<summary>
@@ -170,7 +177,7 @@ namespace MyBot
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("متوجه نشدیم");
-                        sb.AppendLine(" از منوی پایین انتخاب کنید " + "👇🏻");
+                        sb.AppendLine("از منوی پایین انتخاب کنید " + "👇🏻");
                         sb.AppendLine("");
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), default, default, default, default, 0, default, mainKeyboardMarkup);
@@ -240,6 +247,13 @@ namespace MyBot
             // Stop
             else if (swBtn_StartOrStop.Value == false)
             {
+                txt_Message.Enabled = false;
+                txt_FilePath.Enabled = false;
+                btn_Send.Enabled = false;
+                btn_SelectFile.Enabled = false;
+                btn_SendPhoto.Enabled = false;
+                btn_SendVideo.Enabled = false;
+                btn_DelPath.Enabled = false;
 
                 if (botThread == null)
                 {
@@ -259,5 +273,101 @@ namespace MyBot
             }
         }
         #endregion SwitchButton_Start-Or-Stop
+
+
+        /// <summary>
+        /// Send Message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Send_Click(object sender, EventArgs e)
+        {
+            if (dgvReport.CurrentRow != null)
+            {
+                int chatID = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
+                bot.SendTextMessageAsync(chatID, txt_Message.Text, ParseMode.Html);
+                txt_Message.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// Select File For Send
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SelectFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                txt_FilePath.Text = openFile.FileName;
+
+            }
+        }
+
+        /// <summary>
+        /// Send Photo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SendPhoto_Click(object sender, EventArgs e)
+        {
+            if (dgvReport.CurrentRow != null)
+            {
+                try
+                {
+                    int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
+                    InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                    bot.SendPhotoAsync(chatId, new InputOnlineFile(imageFile.Content, "Bot.jpg"), txt_Message.Text, ParseMode.Html);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Send Video
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SendVideo_Click(object sender, EventArgs e)
+        {
+            if (dgvReport.CurrentRow != null)
+            {
+                try
+                {
+                    int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
+                    InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                    bot.SendPhotoAsync(chatId, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// emptying TextBox File Path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txt_FilePath.Text = "";
+        }
+
+        /// <summary>
+        /// Developer information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_About_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Mohammad Reza Amoori  👤 \n.NET Developer (C#)  👨🏻‍💻 \nPhone: 09035170373  📞 \nResume: yek.link/mrx10  🌐 \nInstagram: instagram.com/mr__amoori  📡 \nTelegram: @Doitik  🚀 \nEmail: Mohamad.reza.amoori99@gmail.com  📧", "Developer information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
     }
 }
