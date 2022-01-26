@@ -40,6 +40,7 @@
             this.dgvReport = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.ChatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Command = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MessageId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +60,7 @@
             this.groupPanel1.Location = new System.Drawing.Point(0, 0);
             this.groupPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(516, 70);
+            this.groupPanel1.Size = new System.Drawing.Size(595, 70);
             // 
             // 
             // 
@@ -115,7 +116,7 @@
             this.txt_Token.Location = new System.Drawing.Point(98, 14);
             this.txt_Token.Name = "txt_Token";
             this.txt_Token.PreventEnterBeep = true;
-            this.txt_Token.Size = new System.Drawing.Size(403, 21);
+            this.txt_Token.Size = new System.Drawing.Size(482, 21);
             this.txt_Token.TabIndex = 0;
             // 
             // metroStatusBar1
@@ -130,9 +131,9 @@
             this.metroStatusBar1.Font = new System.Drawing.Font("Segoe UI", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.metroStatusBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.lbl_Status});
-            this.metroStatusBar1.Location = new System.Drawing.Point(0, 420);
+            this.metroStatusBar1.Location = new System.Drawing.Point(0, 466);
             this.metroStatusBar1.Name = "metroStatusBar1";
-            this.metroStatusBar1.Size = new System.Drawing.Size(516, 22);
+            this.metroStatusBar1.Size = new System.Drawing.Size(595, 22);
             this.metroStatusBar1.TabIndex = 1;
             this.metroStatusBar1.Text = "metroStatusBar1";
             // 
@@ -152,7 +153,7 @@
             this.panelEx1.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx1.Location = new System.Drawing.Point(0, 67);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(516, 238);
+            this.panelEx1.Size = new System.Drawing.Size(595, 238);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -178,6 +179,7 @@
             this.dgvReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ChatId,
             this.UserName,
+            this.FullName,
             this.Command,
             this.MessageId,
             this.Date});
@@ -194,7 +196,7 @@
             this.dgvReport.Location = new System.Drawing.Point(0, 0);
             this.dgvReport.Name = "dgvReport";
             this.dgvReport.ReadOnly = true;
-            this.dgvReport.Size = new System.Drawing.Size(516, 238);
+            this.dgvReport.Size = new System.Drawing.Size(595, 238);
             this.dgvReport.TabIndex = 0;
             // 
             // ChatId
@@ -207,11 +209,19 @@
             // 
             // UserName
             // 
-            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.UserName.HeaderText = "User Name";
             this.UserName.Name = "UserName";
             this.UserName.ReadOnly = true;
             this.UserName.Width = 84;
+            // 
+            // FullName
+            // 
+            this.FullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FullName.HeaderText = "Full Name";
+            this.FullName.Name = "FullName";
+            this.FullName.ReadOnly = true;
+            this.FullName.Width = 78;
             // 
             // Command
             // 
@@ -223,7 +233,7 @@
             // 
             // MessageId
             // 
-            this.MessageId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.MessageId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.MessageId.HeaderText = "Message ID";
             this.MessageId.Name = "MessageId";
             this.MessageId.ReadOnly = true;
@@ -241,7 +251,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(516, 442);
+            this.ClientSize = new System.Drawing.Size(595, 488);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.metroStatusBar1);
             this.Controls.Add(this.groupPanel1);
@@ -272,6 +282,7 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChatId;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Command;
         private System.Windows.Forms.DataGridViewTextBoxColumn MessageId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
