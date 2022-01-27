@@ -12,7 +12,7 @@ namespace Api_MyBot
     {
         public string NimBaha(string link)
         {
-            string url = "https://Okaliptoos-api.ir/nim/index.php?link=" +link ;
+            string url = "https://Okaliptoos-api.ir/nim/index.php?link=" + link;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result.ToString();

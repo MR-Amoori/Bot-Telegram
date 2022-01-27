@@ -31,10 +31,19 @@ namespace MyBot
         private Telegram.Bot.Types.Update[] update;
         private ReplyKeyboardMarkup mainKeyboardMarkup;
         private int progressForBar = 0;
-
+        
+        private JokApi jok;
+        private DanestaniApi danestani;
+        private DastenKotahApi dastenkotah;
+        private TavalodApi tavalod;
+        
         public Form1()
         {
             InitializeComponent();
+            jok = new JokApi();
+            danestani = new DanestaniApi();
+            dastenkotah = new DastenKotahApi();
+            tavalod = new TavalodApi();
         }
 
         /// <summary>
@@ -205,12 +214,107 @@ namespace MyBot
                         sb.AppendLine("ابزار مورد نظر خود را انتخاب کنید 🔧");
 
                         ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
-                        KeyboardButton[] row1 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") };
-                        KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
-                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2 };
+                        KeyboardButton[] row1 = { new KeyboardButton("🎲 سرگرمی 🎲") };
+                        KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") };
+                        KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
 
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
+
+                    /// <summary>
+                    /// سرگرمی
+                    /// </summary>
+                    #region سرگرمی
+                    else if (text.Contains("سرگرمی"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("سرگرمی مورد نظر خود را انتخاب کنید 🧩");
+                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🎭 جوک 🎭"), new KeyboardButton("🎬 دانستنی 🎬") };
+                        KeyboardButton[] row2 = { new KeyboardButton("🎂 جزئیات تولد 🎂"), new KeyboardButton("📚 داستان کوتاه 📚") };
+                        KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        rkm.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, rkm);
+                    }
+
+                    ///<summary>
+                    /// جوک
+                    /// </summary>
+                    #region جوک
+                    else if (text.Contains("🎭 جوک 🎭"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("دسته مورد نظر خود را انتخاب کنید 🗂");
+                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🤹🏻‍♂️ جوک طنز 🤹🏻‍♂️"), new KeyboardButton("📖 خاطرات طنز 📖") };
+                        KeyboardButton[] row2 = { new KeyboardButton("♨️ پ ن پ ♨️"), new KeyboardButton("👀 الکی مثلا 👀") };
+                        KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        rkm.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, rkm);
+                    }
+
+
+                    else if (text.Contains("جوک طنز"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(jok.Jok());                        
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("خاطرات طنز"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(jok.Khaterat());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("الکی مثلا"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(jok.AlakiMasalan());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("پ ن پ"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(jok.PaNaPa());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    #endregion جوک
+
+
+                    ///<summary>
+                    /// دانستنی
+                    /// </summary>
+                    else if (text.Contains("دانستنی"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(danestani.Danestani());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("داستان کوتاه"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(dastenkotah.Dastan());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("جزئیات تولد"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+             
+                    }
+
+                    #endregion سرگرمی
+
+
+
 
                     ///<summary>
                     ///پیام نا خوانا

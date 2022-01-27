@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Downloders\InstaDownloderApi.cs" />
+    <Compile Include="Tools\Downloders\InstaDownloderApi.cs" />
     <Compile Include="Tools\NimBahaApi.cs" />
     <Compile Include="Tools\ConvertFinglishToPersianApi.cs" />
     <Compile Include="Ebrat\OghatShareeApi.cs" />
     <Compile Include="Sargarmi\DastenKotahApi.cs" />
     <Compile Include="Ebrat\HadisBozorganApi.cs" />
-    <Compile Include="Sargarmi\MourseApi.cs" />
+    <Compile Include="Tools\MourseApi.cs" />
     <Compile Include="Tools\ShotLinkGenerate.cs" />
     <Compile Include="Tools\SearchInWikiPediaApi.cs" />
     <Compile Include="Tools\PasswordGenerateApi.cs" />
