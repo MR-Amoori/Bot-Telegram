@@ -29,6 +29,7 @@ namespace MyBot
         private TelegramBotClient bot;
         private Telegram.Bot.Types.Update[] update;
         private ReplyKeyboardMarkup mainKeyboardMarkup;
+        private int progressForBar = 0;
 
         public Form1()
         {
@@ -38,11 +39,13 @@ namespace MyBot
         /// <summary>
         /// Load Form
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             mainKeyboardMarkup = new ReplyKeyboardMarkup();
-            KeyboardButton[] row1 = { new KeyboardButton("📒 " + "راهنما" + " 📒") };
-            KeyboardButton[] row2 = { new KeyboardButton("👨🏻‍💻 " + "درباره برنامه نویس" + " 👨🏻‍💻") };
+            KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "ابزار های ربات" + " 🔧") };
+            KeyboardButton[] row2 = { new KeyboardButton("📒 " + "راهنما" + " 📒"), new KeyboardButton("👨🏻‍💻 " + "درباره برنامه نویس" + " 👨🏻‍💻") };
             mainKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
         }
 
@@ -157,9 +160,9 @@ namespace MyBot
                             new InlineKeyboardUrlButton("📧 ایمیل 📧", "Mohamad.reza.amoori99@gmail.com")
                         };
 
-                        inline.InlineKeyboard = new InlineKeyboardUrlButton[][] { row2,row3,row4 };
+                        inline.InlineKeyboard = new InlineKeyboardUrlButton[][] { row2, row3, row4 };
 
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, inline) ;
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, inline);
                     }
 
                     ///<summary>
@@ -191,6 +194,22 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
 
+
+                    ///<summary>
+                    /// Tools ابزارها
+                    /// </summary>
+                    else if (text.Contains("ابزار های ربات"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("ابزار مورد نظر خود را انتخاب کنید 🔧");
+
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") };
+                        KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2 };
+
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
+                    }
 
                     ///<summary>
                     ///پیام نا خوانا
@@ -342,6 +361,7 @@ namespace MyBot
                 try
                 {
                     int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
+                    progressBarItem1.Value = 50;
 
                     /*   InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                     bot.SendPhotoAsync(chatId, new InputOnlineFile(imageFile.Content, "Bot.jpg"), txt_Message.Text, ParseMode.Html);
@@ -349,11 +369,24 @@ namespace MyBot
                     System.IO.FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                     bot.SendPhotoAsync(chatId, new FileToSend("Bot.png", imageFile), txt_Message.Text);
 
+                    progressBarItem1.Value = 100;
+                }
+
+                catch (IOException)
+                {
+                    MessageBox.Show("صبر کنید تا پروسه ارسال فایل به اتمام برسد.", "خطا", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
                 }
                 catch (ArgumentException)
                 {
                     MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                finally
+                {
+                    progressBarItem1.Value = 0;
+                    progressForBar = 0;
+                }
+
 
             }
         }
@@ -370,14 +403,29 @@ namespace MyBot
                 try
                 {
                     int chatId = int.Parse(dgvReport.CurrentRow.Cells[0].Value.ToString());
+                    progressForBar = 50;
+                    progressBarItem1.Value = progressForBar;
                     //InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                     //bot.SendPhotoAsync(chatId, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
                     FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
-                    bot.SendVideoAsync(chatId, new FileToSend("Bot.mp4", imageFile), default,default,default,txt_Message.Text);
+                    bot.SendVideoAsync(chatId, new FileToSend("Bot.mp4", imageFile), default, default, default, txt_Message.Text);
+                    progressForBar = 100;
+                    progressBarItem1.Value = progressForBar;
+                }
+
+                catch (IOException)
+                {
+                    MessageBox.Show("صبر کنید تا پروسه ارسال فایل به اتمام برسد.", "خطا", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
                 }
                 catch (ArgumentException)
                 {
                     MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                finally
+                {
+                    progressForBar = 0;
+                    progressBarItem1.Value = progressForBar;
                 }
             }
         }
@@ -421,8 +469,15 @@ namespace MyBot
         {
             //InputFileStream videoFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
             //bot.SendPhotoAsync(txt_Channel.Text, new InputOnlineFile(videoFile.Content, "mr.mp4"), txt_Message.Text, ParseMode.Html);
-            FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
-            bot.SendVideoAsync(txt_Channel.Text, new FileToSend("Bot.mp4", imageFile), default, default, default, txt_Message.Text);
+            try
+            {
+                FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                bot.SendVideoAsync(txt_Channel.Text, new FileToSend("Bot.mp4", imageFile), default, default, default, txt_Message.Text);
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -434,9 +489,15 @@ namespace MyBot
         {
             //InputFileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
             //bot.SendPhotoAsync(txt_Channel.Text, new InputOnlineFile(imageFile.Content, "Bot.jpg"), txt_Message.Text, ParseMode.Html);
-
-            FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
-            bot.SendPhotoAsync(txt_Channel.Text, new FileToSend("Bot.png", imageFile), txt_Message.Text);
+            try
+            {
+                FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
+                bot.SendPhotoAsync(txt_Channel.Text, new FileToSend("Bot.png", imageFile), txt_Message.Text);
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

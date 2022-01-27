@@ -36,6 +36,8 @@
             this.txt_Token = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.metroStatusBar1 = new DevComponents.DotNetBar.Metro.MetroStatusBar();
             this.lbl_Status = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
+            this.btn_About = new DevComponents.DotNetBar.ButtonItem();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.dgvReport = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.ChatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,20 +47,20 @@
             this.MessageId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
-            this.btn_About = new DevComponents.DotNetBar.ButtonItem();
-            this.txt_Message = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btn_Send = new DevComponents.DotNetBar.ButtonX();
-            this.txt_FilePath = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btn_SelectFile = new System.Windows.Forms.Button();
-            this.btn_SendPhoto = new DevComponents.DotNetBar.ButtonX();
-            this.btn_SendVideo = new DevComponents.DotNetBar.ButtonX();
-            this.btn_DelPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txt_Channel = new System.Windows.Forms.TextBox();
-            this.btn_SendMessageToChannel = new DevComponents.DotNetBar.ButtonX();
-            this.btn_SendPhotoToChannel = new DevComponents.DotNetBar.ButtonX();
             this.btn_SendVideoToChannel = new DevComponents.DotNetBar.ButtonX();
+            this.btn_SendPhotoToChannel = new DevComponents.DotNetBar.ButtonX();
+            this.btn_SendMessageToChannel = new DevComponents.DotNetBar.ButtonX();
+            this.txt_Channel = new System.Windows.Forms.TextBox();
+            this.btn_SendVideo = new DevComponents.DotNetBar.ButtonX();
+            this.btn_SendPhoto = new DevComponents.DotNetBar.ButtonX();
+            this.btn_DelPath = new System.Windows.Forms.Button();
+            this.btn_SelectFile = new System.Windows.Forms.Button();
+            this.txt_FilePath = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btn_Send = new DevComponents.DotNetBar.ButtonX();
+            this.txt_Message = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelItem2 = new DevComponents.DotNetBar.LabelItem();
+            this.progressBarItem1 = new DevComponents.DotNetBar.ProgressBarItem();
             this.groupPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
@@ -149,7 +151,9 @@
             this.metroStatusBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.lbl_Status,
             this.labelItem1,
-            this.btn_About});
+            this.btn_About,
+            this.labelItem2,
+            this.progressBarItem1});
             this.metroStatusBar1.Location = new System.Drawing.Point(0, 533);
             this.metroStatusBar1.Name = "metroStatusBar1";
             this.metroStatusBar1.Size = new System.Drawing.Size(595, 22);
@@ -164,6 +168,23 @@
             this.lbl_Status.SingleLineColor = System.Drawing.SystemColors.InactiveBorder;
             this.lbl_Status.Text = "Offline";
             this.lbl_Status.TextAlignment = System.Drawing.StringAlignment.Center;
+            // 
+            // labelItem1
+            // 
+            this.labelItem1.FontBold = true;
+            this.labelItem1.ForeColor = System.Drawing.Color.White;
+            this.labelItem1.Name = "labelItem1";
+            this.labelItem1.Text = "||";
+            // 
+            // btn_About
+            // 
+            this.btn_About.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btn_About.HotForeColor = System.Drawing.Color.Black;
+            this.btn_About.Name = "btn_About";
+            this.btn_About.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
+            this.btn_About.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F1);
+            this.btn_About.Text = " <b>About</b> ";
+            this.btn_About.Click += new System.EventHandler(this.btn_About_Click);
             // 
             // panelEx1
             // 
@@ -283,22 +304,145 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Send Message";
             // 
-            // labelItem1
+            // groupBox2
             // 
-            this.labelItem1.FontBold = true;
-            this.labelItem1.ForeColor = System.Drawing.Color.White;
-            this.labelItem1.Name = "labelItem1";
-            this.labelItem1.Text = "||";
+            this.groupBox2.Controls.Add(this.btn_SendVideoToChannel);
+            this.groupBox2.Controls.Add(this.btn_SendPhotoToChannel);
+            this.groupBox2.Controls.Add(this.btn_SendMessageToChannel);
+            this.groupBox2.Controls.Add(this.txt_Channel);
+            this.groupBox2.Location = new System.Drawing.Point(12, 110);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(571, 52);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Channel";
             // 
-            // btn_About
+            // btn_SendVideoToChannel
             // 
-            this.btn_About.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_About.HotForeColor = System.Drawing.Color.Black;
-            this.btn_About.Name = "btn_About";
-            this.btn_About.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
-            this.btn_About.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F1);
-            this.btn_About.Text = " <b>About</b> ";
-            this.btn_About.Click += new System.EventHandler(this.btn_About_Click);
+            this.btn_SendVideoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendVideoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendVideoToChannel.Enabled = false;
+            this.btn_SendVideoToChannel.Location = new System.Drawing.Point(89, 20);
+            this.btn_SendVideoToChannel.Name = "btn_SendVideoToChannel";
+            this.btn_SendVideoToChannel.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendVideoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendVideoToChannel.TabIndex = 1;
+            this.btn_SendVideoToChannel.Text = "Video";
+            this.btn_SendVideoToChannel.Click += new System.EventHandler(this.btn_SendVideoToChannel_Click);
+            // 
+            // btn_SendPhotoToChannel
+            // 
+            this.btn_SendPhotoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendPhotoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendPhotoToChannel.Enabled = false;
+            this.btn_SendPhotoToChannel.Location = new System.Drawing.Point(8, 20);
+            this.btn_SendPhotoToChannel.Name = "btn_SendPhotoToChannel";
+            this.btn_SendPhotoToChannel.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendPhotoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendPhotoToChannel.TabIndex = 1;
+            this.btn_SendPhotoToChannel.Text = "Photo";
+            this.btn_SendPhotoToChannel.Click += new System.EventHandler(this.btn_SendPhotoToChannel_Click);
+            // 
+            // btn_SendMessageToChannel
+            // 
+            this.btn_SendMessageToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendMessageToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendMessageToChannel.Enabled = false;
+            this.btn_SendMessageToChannel.Location = new System.Drawing.Point(170, 20);
+            this.btn_SendMessageToChannel.Name = "btn_SendMessageToChannel";
+            this.btn_SendMessageToChannel.Size = new System.Drawing.Size(78, 21);
+            this.btn_SendMessageToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
+            this.btn_SendMessageToChannel.TabIndex = 1;
+            this.btn_SendMessageToChannel.Text = "Send Message";
+            this.btn_SendMessageToChannel.Click += new System.EventHandler(this.btn_SendMessageToChannel_Click);
+            // 
+            // txt_Channel
+            // 
+            this.txt_Channel.BackColor = System.Drawing.SystemColors.Info;
+            this.txt_Channel.Enabled = false;
+            this.txt_Channel.Location = new System.Drawing.Point(254, 20);
+            this.txt_Channel.Name = "txt_Channel";
+            this.txt_Channel.Size = new System.Drawing.Size(311, 21);
+            this.txt_Channel.TabIndex = 0;
+            // 
+            // btn_SendVideo
+            // 
+            this.btn_SendVideo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendVideo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendVideo.Enabled = false;
+            this.btn_SendVideo.Location = new System.Drawing.Point(101, 82);
+            this.btn_SendVideo.Name = "btn_SendVideo";
+            this.btn_SendVideo.Size = new System.Drawing.Size(88, 21);
+            this.btn_SendVideo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btn_SendVideo.TabIndex = 4;
+            this.btn_SendVideo.Text = "Video";
+            this.btn_SendVideo.Click += new System.EventHandler(this.btn_SendVideo_Click);
+            // 
+            // btn_SendPhoto
+            // 
+            this.btn_SendPhoto.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_SendPhoto.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_SendPhoto.Enabled = false;
+            this.btn_SendPhoto.Location = new System.Drawing.Point(7, 82);
+            this.btn_SendPhoto.Name = "btn_SendPhoto";
+            this.btn_SendPhoto.Size = new System.Drawing.Size(88, 21);
+            this.btn_SendPhoto.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btn_SendPhoto.TabIndex = 4;
+            this.btn_SendPhoto.Text = "Photo";
+            this.btn_SendPhoto.Click += new System.EventHandler(this.btn_SendPhoto_Click);
+            // 
+            // btn_DelPath
+            // 
+            this.btn_DelPath.Enabled = false;
+            this.btn_DelPath.ForeColor = System.Drawing.Color.Red;
+            this.btn_DelPath.Location = new System.Drawing.Point(195, 82);
+            this.btn_DelPath.Name = "btn_DelPath";
+            this.btn_DelPath.Size = new System.Drawing.Size(32, 21);
+            this.btn_DelPath.TabIndex = 3;
+            this.btn_DelPath.Text = "Del";
+            this.btn_DelPath.UseVisualStyleBackColor = true;
+            this.btn_DelPath.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btn_SelectFile
+            // 
+            this.btn_SelectFile.Enabled = false;
+            this.btn_SelectFile.Location = new System.Drawing.Point(233, 82);
+            this.btn_SelectFile.Name = "btn_SelectFile";
+            this.btn_SelectFile.Size = new System.Drawing.Size(27, 21);
+            this.btn_SelectFile.TabIndex = 3;
+            this.btn_SelectFile.Text = "...";
+            this.btn_SelectFile.UseVisualStyleBackColor = true;
+            this.btn_SelectFile.Click += new System.EventHandler(this.btn_SelectFile_Click);
+            // 
+            // txt_FilePath
+            // 
+            this.txt_FilePath.BackColor = System.Drawing.SystemColors.Info;
+            // 
+            // 
+            // 
+            this.txt_FilePath.Border.Class = "TextBoxBorder";
+            this.txt_FilePath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txt_FilePath.Enabled = false;
+            this.txt_FilePath.Location = new System.Drawing.Point(266, 82);
+            this.txt_FilePath.Name = "txt_FilePath";
+            this.txt_FilePath.PreventEnterBeep = true;
+            this.txt_FilePath.ReadOnly = true;
+            this.txt_FilePath.Size = new System.Drawing.Size(317, 21);
+            this.txt_FilePath.TabIndex = 2;
+            // 
+            // btn_Send
+            // 
+            this.btn_Send.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_Send.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_Send.Enabled = false;
+            this.btn_Send.Location = new System.Drawing.Point(7, 20);
+            this.btn_Send.Name = "btn_Send";
+            this.btn_Send.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
+            this.btn_Send.Size = new System.Drawing.Size(88, 56);
+            this.btn_Send.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2003;
+            this.btn_Send.TabIndex = 1;
+            this.btn_Send.Text = "Send Message";
+            this.btn_Send.Click += new System.EventHandler(this.btn_Send_Click);
             // 
             // txt_Message
             // 
@@ -319,145 +463,24 @@
             this.txt_Message.Size = new System.Drawing.Size(482, 56);
             this.txt_Message.TabIndex = 0;
             // 
-            // btn_Send
+            // labelItem2
             // 
-            this.btn_Send.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_Send.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_Send.Enabled = false;
-            this.btn_Send.Location = new System.Drawing.Point(7, 20);
-            this.btn_Send.Name = "btn_Send";
-            this.btn_Send.Shape = new DevComponents.DotNetBar.RoundRectangleShapeDescriptor(2);
-            this.btn_Send.Size = new System.Drawing.Size(88, 56);
-            this.btn_Send.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2003;
-            this.btn_Send.TabIndex = 1;
-            this.btn_Send.Text = "Send Message";
-            this.btn_Send.Click += new System.EventHandler(this.btn_Send_Click);
+            this.labelItem2.ForeColor = System.Drawing.Color.White;
+            this.labelItem2.Name = "labelItem2";
+            this.labelItem2.Text = "||";
             // 
-            // txt_FilePath
-            // 
-            this.txt_FilePath.BackColor = System.Drawing.SystemColors.Info;
+            // progressBarItem1
             // 
             // 
             // 
-            this.txt_FilePath.Border.Class = "TextBoxBorder";
-            this.txt_FilePath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txt_FilePath.Enabled = false;
-            this.txt_FilePath.Location = new System.Drawing.Point(266, 82);
-            this.txt_FilePath.Name = "txt_FilePath";
-            this.txt_FilePath.PreventEnterBeep = true;
-            this.txt_FilePath.ReadOnly = true;
-            this.txt_FilePath.Size = new System.Drawing.Size(317, 21);
-            this.txt_FilePath.TabIndex = 2;
             // 
-            // btn_SelectFile
-            // 
-            this.btn_SelectFile.Enabled = false;
-            this.btn_SelectFile.Location = new System.Drawing.Point(233, 82);
-            this.btn_SelectFile.Name = "btn_SelectFile";
-            this.btn_SelectFile.Size = new System.Drawing.Size(27, 21);
-            this.btn_SelectFile.TabIndex = 3;
-            this.btn_SelectFile.Text = "...";
-            this.btn_SelectFile.UseVisualStyleBackColor = true;
-            this.btn_SelectFile.Click += new System.EventHandler(this.btn_SelectFile_Click);
-            // 
-            // btn_SendPhoto
-            // 
-            this.btn_SendPhoto.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_SendPhoto.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_SendPhoto.Enabled = false;
-            this.btn_SendPhoto.Location = new System.Drawing.Point(7, 82);
-            this.btn_SendPhoto.Name = "btn_SendPhoto";
-            this.btn_SendPhoto.Size = new System.Drawing.Size(88, 21);
-            this.btn_SendPhoto.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btn_SendPhoto.TabIndex = 4;
-            this.btn_SendPhoto.Text = "Photo";
-            this.btn_SendPhoto.Click += new System.EventHandler(this.btn_SendPhoto_Click);
-            // 
-            // btn_SendVideo
-            // 
-            this.btn_SendVideo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_SendVideo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_SendVideo.Enabled = false;
-            this.btn_SendVideo.Location = new System.Drawing.Point(101, 82);
-            this.btn_SendVideo.Name = "btn_SendVideo";
-            this.btn_SendVideo.Size = new System.Drawing.Size(88, 21);
-            this.btn_SendVideo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btn_SendVideo.TabIndex = 4;
-            this.btn_SendVideo.Text = "Video";
-            this.btn_SendVideo.Click += new System.EventHandler(this.btn_SendVideo_Click);
-            // 
-            // btn_DelPath
-            // 
-            this.btn_DelPath.Enabled = false;
-            this.btn_DelPath.ForeColor = System.Drawing.Color.Red;
-            this.btn_DelPath.Location = new System.Drawing.Point(195, 82);
-            this.btn_DelPath.Name = "btn_DelPath";
-            this.btn_DelPath.Size = new System.Drawing.Size(32, 21);
-            this.btn_DelPath.TabIndex = 3;
-            this.btn_DelPath.Text = "Del";
-            this.btn_DelPath.UseVisualStyleBackColor = true;
-            this.btn_DelPath.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btn_SendVideoToChannel);
-            this.groupBox2.Controls.Add(this.btn_SendPhotoToChannel);
-            this.groupBox2.Controls.Add(this.btn_SendMessageToChannel);
-            this.groupBox2.Controls.Add(this.txt_Channel);
-            this.groupBox2.Location = new System.Drawing.Point(12, 110);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(571, 52);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Channel";
-            // 
-            // txt_Channel
-            // 
-            this.txt_Channel.BackColor = System.Drawing.SystemColors.Info;
-            this.txt_Channel.Enabled = false;
-            this.txt_Channel.Location = new System.Drawing.Point(254, 20);
-            this.txt_Channel.Name = "txt_Channel";
-            this.txt_Channel.Size = new System.Drawing.Size(311, 21);
-            this.txt_Channel.TabIndex = 0;
-            // 
-            // btn_SendMessageToChannel
-            // 
-            this.btn_SendMessageToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_SendMessageToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_SendMessageToChannel.Enabled = false;
-            this.btn_SendMessageToChannel.Location = new System.Drawing.Point(170, 20);
-            this.btn_SendMessageToChannel.Name = "btn_SendMessageToChannel";
-            this.btn_SendMessageToChannel.Size = new System.Drawing.Size(78, 21);
-            this.btn_SendMessageToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
-            this.btn_SendMessageToChannel.TabIndex = 1;
-            this.btn_SendMessageToChannel.Text = "Send Message";
-            this.btn_SendMessageToChannel.Click += new System.EventHandler(this.btn_SendMessageToChannel_Click);
-            // 
-            // btn_SendPhotoToChannel
-            // 
-            this.btn_SendPhotoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_SendPhotoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_SendPhotoToChannel.Enabled = false;
-            this.btn_SendPhotoToChannel.Location = new System.Drawing.Point(8, 20);
-            this.btn_SendPhotoToChannel.Name = "btn_SendPhotoToChannel";
-            this.btn_SendPhotoToChannel.Size = new System.Drawing.Size(75, 21);
-            this.btn_SendPhotoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
-            this.btn_SendPhotoToChannel.TabIndex = 1;
-            this.btn_SendPhotoToChannel.Text = "Photo";
-            this.btn_SendPhotoToChannel.Click += new System.EventHandler(this.btn_SendPhotoToChannel_Click);
-            // 
-            // btn_SendVideoToChannel
-            // 
-            this.btn_SendVideoToChannel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_SendVideoToChannel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_SendVideoToChannel.Enabled = false;
-            this.btn_SendVideoToChannel.Location = new System.Drawing.Point(89, 20);
-            this.btn_SendVideoToChannel.Name = "btn_SendVideoToChannel";
-            this.btn_SendVideoToChannel.Size = new System.Drawing.Size(75, 21);
-            this.btn_SendVideoToChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.VS2005;
-            this.btn_SendVideoToChannel.TabIndex = 1;
-            this.btn_SendVideoToChannel.Text = "Video";
-            this.btn_SendVideoToChannel.Click += new System.EventHandler(this.btn_SendVideoToChannel_Click);
+            this.progressBarItem1.BackStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.progressBarItem1.ChunkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.progressBarItem1.ChunkColor2 = System.Drawing.Color.Lime;
+            this.progressBarItem1.ChunkGradientAngle = 0F;
+            this.progressBarItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.progressBarItem1.Name = "progressBarItem1";
+            this.progressBarItem1.RecentlyUsed = false;
             // 
             // Form1
             // 
@@ -518,6 +541,8 @@
         private DevComponents.DotNetBar.ButtonX btn_SendPhotoToChannel;
         private DevComponents.DotNetBar.ButtonX btn_SendMessageToChannel;
         private System.Windows.Forms.TextBox txt_Channel;
+        private DevComponents.DotNetBar.LabelItem labelItem2;
+        private DevComponents.DotNetBar.ProgressBarItem progressBarItem1;
     }
 }
 
