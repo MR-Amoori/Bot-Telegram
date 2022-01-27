@@ -44,12 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateApi.cs" />
-    <Compile Include="FontEnglishApi.cs" />
+    <Compile Include="Downloders\InstaDownloderApi.cs" />
+    <Compile Include="Tools\NimBahaApi.cs" />
+    <Compile Include="Tools\ConvertFinglishToPersianApi.cs" />
+    <Compile Include="Ebrat\OghatShareeApi.cs" />
+    <Compile Include="Sargarmi\DastenKotahApi.cs" />
+    <Compile Include="Ebrat\HadisBozorganApi.cs" />
+    <Compile Include="Sargarmi\MourseApi.cs" />
+    <Compile Include="Tools\ShotLinkGenerate.cs" />
+    <Compile Include="Tools\SearchInWikiPediaApi.cs" />
+    <Compile Include="Tools\PasswordGenerateApi.cs" />
+    <Compile Include="Sargarmi\DanestaniApi.cs" />
+    <Compile Include="Tools\DateApi.cs" />
+    <Compile Include="Sargarmi\JokApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ebrat\ZekreAyamHaftehApi.cs" />
+    <Compile Include="Sargarmi\TavalodApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
