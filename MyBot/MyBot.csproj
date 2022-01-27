@@ -99,5 +99,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api_MyBot\Api_MyBot.csproj">
+      <Project>{d705af54-073e-448b-ac2f-ac74c8c04ee5}</Project>
+      <Name>Api_MyBot</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

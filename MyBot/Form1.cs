@@ -14,6 +14,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using System.IO;
 using Telegram.Bot.Types.InlineKeyboardButtons;
+using Api_MyBot;
 
 namespace MyBot
 {
