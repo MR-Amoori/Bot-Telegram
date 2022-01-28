@@ -18,7 +18,9 @@ using Api_MyBot;
 
 namespace MyBot
 {
-
+    /// <summary>
+    /// ////////////////   وب سرویس دانلود از ایسنتاگرام نیا به تعمیر دارد
+    /// </summary>
 
     public partial class Form1 : Form
     {
@@ -31,19 +33,23 @@ namespace MyBot
         private Telegram.Bot.Types.Update[] update;
         private ReplyKeyboardMarkup mainKeyboardMarkup;
         private int progressForBar = 0;
-        
-        private JokApi jok;
-        private DanestaniApi danestani;
-        private DastenKotahApi dastenkotah;
-        private TavalodApi tavalod;
-        
+
+        private static JokApi jok = new JokApi();
+        private static DanestaniApi danestani = new DanestaniApi();
+        private static DastenKotahApi dastenkotah = new DastenKotahApi();
+        private static TavalodApi tavalod = new TavalodApi();
+
+        private static HadisBozorganApi hadis = new HadisBozorganApi();
+        private static ZekreAyamHaftehApi zekre = new ZekreAyamHaftehApi();
+
+        private static DateApi dateAp = new DateApi();
+        private static ShotLinkGenerate shotLink = new ShotLinkGenerate();
+        private static InstaDownloderApi instaDownloder=new InstaDownloderApi();
+
         public Form1()
         {
             InitializeComponent();
-            jok = new JokApi();
-            danestani = new DanestaniApi();
-            dastenkotah = new DastenKotahApi();
-            tavalod = new TavalodApi();
+
         }
 
         /// <summary>
@@ -214,13 +220,71 @@ namespace MyBot
                         sb.AppendLine("ابزار مورد نظر خود را انتخاب کنید 🔧");
 
                         ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
-                        KeyboardButton[] row1 = { new KeyboardButton("🎲 سرگرمی 🎲") };
-                        KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") };
+                        KeyboardButton[] row1 = { new KeyboardButton("🎲 سرگرمی 🎲"), new KeyboardButton("☀️ روزانه ☀️") };
+                        KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") , new KeyboardButton("📍 دانلودر 📍") };
                         KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
 
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
+
+                    ///<summary>
+                    /// دانلودر
+                    /// </summary>
+                    #region دانلودر
+
+                    else if (text.Contains("دانلودر"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("دانلودر مورد نظر خود را انتخاب کنید 🔗");
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🔹 اینستاگرام 🔹"), new KeyboardButton("🔸 یوتیوب 🔸") };
+                        KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard); 
+                    }
+
+                    else if (text.Contains("اینستاگرام"))
+                    {
+                        StringBuilder sb=new StringBuilder();
+                                               
+                        sb.AppendLine("لینک پست مورد نظر را ارسال کنید 🔗");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("https://www.instagram.com/"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine($"لینک دانلود : {instaDownloder.Download(text)}");
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0,toolsKeyboard);
+                    }
+
+                    #endregion دانلودر
+
+
+                    ///<summary>
+                    /// کوتاه کننده لینک
+                    /// </summary>
+                    #region کوتاه کننده لینک
+
+                    else if (text.Contains("کوتاه کننده لینک"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("آدرس خود را برای کوتاه کردن وارد کنید. مانند نمونه زیر :\n" + " https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("https://"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(shotLink.ShortLink(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    #endregion کوتاه کننده لینک
 
                     /// <summary>
                     /// سرگرمی
@@ -258,7 +322,7 @@ namespace MyBot
                     else if (text.Contains("جوک طنز"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine(jok.Jok());                        
+                        sb.AppendLine(jok.Jok());
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                     }
 
@@ -308,10 +372,54 @@ namespace MyBot
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
-             
+
                     }
 
                     #endregion سرگرمی
+
+
+                    ///<summary>
+                    /// روزانه
+                    /// </summary>
+                    #region روزانه
+
+                    else if (text.Contains("روزانه"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(dateAp.LongDate());
+                        sb.AppendLine("");
+                        sb.AppendLine("انتخاب کنید 🗂");
+                        ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("📝 حدیث بزرگان 📝"), new KeyboardButton("🕌 اوقات شرعی 🕌") };
+                        KeyboardButton[] row2 = { new KeyboardButton("📿 ذکر ایام هفته 📿") };
+                        KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        rkm.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, rkm);
+                    }
+
+                    else if (text.Contains("حدیث بزرگان"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(hadis.Hadis());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("ذکر ایام هفته"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(zekre.Zekr());
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    else if (text.Contains("اوقات شرعی"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+                    #endregion روزانه
+
 
 
 

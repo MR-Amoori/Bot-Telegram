@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Api_MyBot
 {
-    internal class HadisBozorganApi
+    public class HadisBozorganApi
     {
         public string Hadis()
         {
