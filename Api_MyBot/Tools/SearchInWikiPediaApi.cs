@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Api_MyBot
 {
-    public class SearchInWikiPedia
+    public class SearchInWikiPediaApi
     {
-        public string Search(string text)
+        public string Search(string textSearch)
         {
-            string url = "http://api.codebazan.ir/wiki/?search="+text;
+           string searchtext = textSearch.Remove(0, 4);
+            string url = "http://api.codebazan.ir/wiki/?search="+searchtext;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+                return serialize.ToString();
             }
         }
 

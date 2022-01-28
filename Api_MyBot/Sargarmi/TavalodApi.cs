@@ -195,14 +195,14 @@ namespace Api_MyBot
 
     public class TavalodApi
     {
-        public string Tavalod(int year,int month,int day)
+        public string Tavalod(int year, int month, int day)
         {
-            string url = "https://api.codebazan.ir/age/?year="+year+"&&month="+month+"&&day="+day;
+            string url = "https://api.codebazan.ir/age/?year=" + year + "&&month=" + month + "&&day=" + day;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result.ToString();
                 var deSerialize = JsonConvert.DeserializeObject<Root>(serialize);
-                StringBuilder sb=new StringBuilder();
+                StringBuilder sb = new StringBuilder();
                 sb.AppendLine($"تولد شما به میلادی : {deSerialize.result.birthmiladi}");
                 sb.AppendLine($"تعداد روز هایی که زندگی کردید : {deSerialize.result.days}");
                 sb.AppendLine($"تعداد ماه هایی که زندگی کردید : {deSerialize.result.g_month}");
@@ -215,6 +215,42 @@ namespace Api_MyBot
 
         public string Tavalod2(int year, int month, int day)
         {
+            string url = $"https://Okaliptoos-api.ir/tavalod/index.php?year={year}&month={month}&day={day}";
+            using (var client = new HttpClient())
+            {
+                var serialize = client.GetStringAsync(url).Result.ToString();
+                var deSerialize = JsonConvert.DeserializeObject<Root2>(serialize);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"تولد شما به میلادی : {deSerialize.Result.birth_miladi}");
+                sb.AppendLine($"تولد شما به قمری : {deSerialize.Result.birth_ghamari}");
+                sb.AppendLine($"سال : {deSerialize.Result.year}");
+                sb.AppendLine($"ماه : {deSerialize.Result.month}");
+                sb.AppendLine($"روز : {deSerialize.Result.day}");
+                sb.AppendLine($"تعداد روز هایی که زندگی کردید : {deSerialize.Result.days}");
+                sb.AppendLine($"روز هفته تولد شما : {deSerialize.Result.week_birth_day}");
+                sb.AppendLine($"فصل تولد : {deSerialize.Result.fasl}");
+                sb.AppendLine($"حیوان : {deSerialize.Result.animal}");
+                sb.AppendLine($"نماد : {deSerialize.Result.namad}");
+                sb.AppendLine($"سنگ : {deSerialize.Result.sang}");
+                sb.AppendLine($"روز های باقی مانده تا سالگرد تولد شما : {deSerialize.Result.ta_tavalod}");
+                return sb.ToString();
+            }
+        }
+
+        public string Tavalod3(string fuul)
+        {
+            string Ful1 = fuul.Replace("سال: ", string.Empty);
+            string Ful2= Ful1.Replace("ماه: ",string.Empty);
+            string Ful3 = Ful2.Replace("روز: ", string.Empty);
+
+            string yearString = Ful3.Substring(0, 4);
+            string monthString = Ful3.Substring(4,3);
+            string dayString = Ful3.Substring(7, 3);
+
+            int year = int.Parse(yearString);
+            int month = int.Parse(monthString);
+            int day = int.Parse(dayString);
+
             string url = $"https://Okaliptoos-api.ir/tavalod/index.php?year={year}&month={month}&day={day}";
             using (var client = new HttpClient())
             {

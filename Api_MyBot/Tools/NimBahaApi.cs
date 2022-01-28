@@ -12,6 +12,7 @@ namespace Api_MyBot
     {
         public string NimBaha(string link)
         {
+            link=link.Remove(0, 8);
             string url = "https://Okaliptoos-api.ir/nim/index.php?link=" + link;
             using (var client = new HttpClient())
             {

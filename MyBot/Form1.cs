@@ -19,7 +19,7 @@ using Api_MyBot;
 namespace MyBot
 {
     /// <summary>
-    /// ////////////////   وب سرویس دانلود از ایسنتاگرام نیا به تعمیر دارد
+    /// /////////  
     /// </summary>
 
     public partial class Form1 : Form
@@ -44,7 +44,9 @@ namespace MyBot
 
         private static DateApi dateAp = new DateApi();
         private static ShotLinkGenerate shotLink = new ShotLinkGenerate();
-        private static InstaDownloderApi instaDownloder=new InstaDownloderApi();
+        private static InstaDownloderApi instaDownloder = new InstaDownloderApi();
+        private static SearchInWikiPediaApi SearchInWikiPedia = new SearchInWikiPediaApi();
+        private static NimBahaApi nimBaha = new NimBahaApi();
 
         public Form1()
         {
@@ -221,9 +223,11 @@ namespace MyBot
 
                         ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
                         KeyboardButton[] row1 = { new KeyboardButton("🎲 سرگرمی 🎲"), new KeyboardButton("☀️ روزانه ☀️") };
-                        KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗") , new KeyboardButton("📍 دانلودر 📍") };
-                        KeyboardButton[] row3 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
-                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3 };
+                        KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗"), new KeyboardButton("📍 دانلودر 📍") };
+                        KeyboardButton[] row3 = { new KeyboardButton("📎 ساخت لینک نیم بها 📎"), new KeyboardButton("✂️ کد مورسی ✂️") };
+                        KeyboardButton[] row4 = { new KeyboardButton("🔒 پسورد ساز 🔒"), new KeyboardButton("🔎 سرچ مطلب 🔍") };
+                        KeyboardButton[] row5 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3, row4, row5 };
 
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
@@ -241,13 +245,12 @@ namespace MyBot
                         KeyboardButton[] row1 = { new KeyboardButton("🔹 اینستاگرام 🔹"), new KeyboardButton("🔸 یوتیوب 🔸") };
                         KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2 };
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard); 
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
 
                     else if (text.Contains("اینستاگرام"))
                     {
-                        StringBuilder sb=new StringBuilder();
-                                               
+                        StringBuilder sb = new StringBuilder();
                         sb.AppendLine("لینک پست مورد نظر را ارسال کنید 🔗");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                     }
@@ -259,10 +262,67 @@ namespace MyBot
                         ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
                         KeyboardButton[] row1 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         toolsKeyboard.Keyboard = new KeyboardButton[][] { row1 };
-                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0,toolsKeyboard);
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
+                    }
+
+                    else if (text.Contains("یوتیوب"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                     }
 
                     #endregion دانلودر
+
+                    ///<summary>
+                    /// سرچ مطلب
+                    /// </summary>
+                    #region سرچ مطلب
+                    else if (text.Contains("سرچ مطلب"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        StringBuilder sb2 = new StringBuilder();
+                        //sb.AppendLine(@"پیام زیر را کپی و لینک خورا جایگیزن کلمه 'متن جستجو' کنید و ارسال کنید.");
+                        sb.AppendLine("این امکان نیاز به تعمیر دارد 🔧");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                        sb2.AppendLine("سرچ:متن جوستجو");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    //else if (text.Contains("سرچ:"))
+                    //{
+                    //    StringBuilder sb=new StringBuilder();
+                    //    sb.AppendLine("نتیجه: " + SearchInWikiPedia.Search(text));
+                    //    bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    //}
+
+                    #endregion سرچ مطلب
+
+                    ///<summary>
+                    /// لینک نیم بها
+                    /// </summary>
+                    #region لینک نیم بها
+
+                    else if (text.Contains("لینک نیم بها"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("آدرس لینک دانلود خود را برای نیم بها کردن جایگزین عبارت 'لینک مورد نظر' کنید. مانند نمونه زیر");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("نیم بها:لینک مورد نظر");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("نیم بها:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine($"لینک نیم بهای شما: {nimBaha.NimBaha(text)}");
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                    }
+
+
+
+                    #endregion لینک نیم بها
 
 
                     ///<summary>
@@ -370,9 +430,21 @@ namespace MyBot
                     else if (text.Contains("جزئیات تولد"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        StringBuilder sb2 = new StringBuilder();
+                        //  sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        sb.AppendLine("پیام زیر را کپی و اطلاعات خورا جایگیزن اعداد آن کنید و ارسال کنید.");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                        sb2.AppendLine("سال: 1383");
+                        sb2.AppendLine("ماه: 06");
+                        sb2.AppendLine("روز: 02");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString(), ParseMode.Html);
+                    }
 
+                    else if (text.Contains("سال") && text.Contains("ماه") && text.Contains("روز"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(tavalod.Tavalod3(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html);
                     }
 
                     #endregion سرگرمی
@@ -419,8 +491,6 @@ namespace MyBot
                     }
 
                     #endregion روزانه
-
-
 
 
 
