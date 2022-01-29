@@ -201,12 +201,43 @@ namespace MyBot
                         sb.AppendLine("حوضه راهنمایی را مشخص کنید.");
 
                         ReplyKeyboardMarkup HelpKeyboardMarkup = new ReplyKeyboardMarkup();
-                        KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "دستورات اولیه" + " 🔧"), new KeyboardButton("hele") };
+                        KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "دستورات اولیه" + " 🔧"), new KeyboardButton("⛑ پشتیبانی ⛑") };
                         KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
                         HelpKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
 
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, HelpKeyboardMarkup);
                     }
+
+
+                    ///<summary>
+                    /// راهنما
+                    /// </summary>
+                    #region راهنما
+
+                    else if (text.Contains("دستورات اولیه"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("در حال کامل کردن بات هستیم.");
+                        sb.AppendLine("به زودی این قسمت کامل میشود");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("پشتیبانی"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("پیام خودرا مستقیما با فرمت زیر برای پشتیبانی بفرستید.");
+                        sb.AppendLine("پشتیبانی:پیام مورد نظر");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("پشتیبانی:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("پیام شما به ادمین ربات ارسال شد به زودی پاسخ آن برای شما ارسال میگردد.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    #endregion راهنما
 
                     ///<summary>
                     /// back بازگشت
@@ -299,20 +330,21 @@ namespace MyBot
                     else if (text.Contains("📞 اطلاعات شماره 📞"))
                     {
                         StringBuilder sb = new StringBuilder(); ;
-                        sb.AppendLine("شماره تلفن مورد نظر را طبق فرمت زیر ارسال کنید.");
+                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        //sb.AppendLine("شماره تلفن مورد نظر را طبق فرمت زیر ارسال کنید.");
                         bot.SendTextMessageAsync(chatId, sb.ToString());
-                        StringBuilder sb2 = new StringBuilder();
-                        sb2.AppendLine("شماره تلفن شخص:09120000000");
-                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                        //StringBuilder sb2 = new StringBuilder();
+                        //sb2.AppendLine("شماره تلفن شخص:09120000000");
+                        //bot.SendTextMessageAsync(chatId, sb2.ToString());
                     }
 
-                    else if (text.Contains("شماره تلفن شخص:"))
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine(findNumber.InformationNumber(text));
-                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    //else if (text.Contains("شماره تلفن شخص:"))
+                    //{
+                    //    StringBuilder sb = new StringBuilder();
+                    //    sb.AppendLine(findNumber.InformationNumber(text));
+                    //    bot.SendTextMessageAsync(chatId, sb.ToString());
 
-                    }
+                    //}
 
                     #endregion شماره تلفن
 
@@ -449,7 +481,7 @@ namespace MyBot
                     {
                         StringBuilder sb = new StringBuilder();
                         StringBuilder sb2 = new StringBuilder();
-                        //sb.AppendLine(@"پیام زیر را کپی و لینک خورا جایگیزن کلمه 'متن جستجو' کنید و ارسال کنید.");
+                        //sb.AppendLine(@"پیام زیر را کپی و لینک خورا جایگزین کلمه 'متن جستجو' کنید و ارسال کنید.");
                         sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                         //sb2.AppendLine("سرچ:متن جوستجو");
@@ -600,7 +632,7 @@ namespace MyBot
                         StringBuilder sb = new StringBuilder();
                         StringBuilder sb2 = new StringBuilder();
                         //  sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
-                        sb.AppendLine("پیام زیر را کپی و اطلاعات خورا جایگیزن اعداد آن کنید و ارسال کنید.");
+                        sb.AppendLine("پیام زیر را کپی و اطلاعات خورا جایگزین اعداد آن کنید و ارسال کنید.");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                         sb2.AppendLine("سال: 1383");
                         sb2.AppendLine("ماه: 06");
@@ -976,7 +1008,7 @@ namespace MyBot
             try
             {
                 var chattid = Convert.ToInt64(txt_ChatId.Text);
-            bot.SendTextMessageAsync(chattid,txt_Message.Text);
+                bot.SendTextMessageAsync(chattid, txt_Message.Text);
             }
             catch
             {
