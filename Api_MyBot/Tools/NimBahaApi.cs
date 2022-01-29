@@ -12,14 +12,14 @@ namespace Api_MyBot
     {
         public string NimBaha(string link)
         {
-            link=link.Remove(0, 8);
+            link = link.Remove(0, 8);
             string url = "https://Okaliptoos-api.ir/nim/index.php?link=" + link;
-            using (var client = new HttpClient())
-            {
-                var serialize = client.GetStringAsync(url).Result.ToString();
-                var deSerialize = JsonConvert.DeserializeObject<Rootinm>(serialize);
-                return deSerialize.Result.link;
-            }
+            var client = new HttpClient();
+            var serialize = client.GetStringAsync(url).Result;
+            return serialize;
+            var deSerialize = JsonConvert.DeserializeObject<Rootinm>(serialize);
+            return deSerialize.Result.link;
+            client.Dispose();
         }
 
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);

@@ -19,7 +19,7 @@ using Api_MyBot;
 namespace MyBot
 {
     /// <summary>
-    /// /////////  
+    /// /////////  لینک نیم بها تعمیر شود
     /// </summary>
 
     public partial class Form1 : Form
@@ -47,6 +47,8 @@ namespace MyBot
         private static InstaDownloderApi instaDownloder = new InstaDownloderApi();
         private static SearchInWikiPediaApi SearchInWikiPedia = new SearchInWikiPediaApi();
         private static NimBahaApi nimBaha = new NimBahaApi();
+        private static MourseApi mourse = new MourseApi();
+        private static FindNumberApi findNumber= new FindNumberApi();
 
         public Form1()
         {
@@ -123,6 +125,9 @@ namespace MyBot
                     var text = up.Message.Text.ToLower();
                     var from = up.Message.From;
                     var chatId = up.Message.Chat.Id;
+
+                
+
 
                     /// <summary>
                     /// /start Command
@@ -232,6 +237,73 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
 
+
+                    ///<summary>
+                    /// کد مورسی
+                    /// </summary>
+                    #region کد مورسی
+
+                    else if (text.Contains("✂️ کد مورسی ✂️"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("قابلیت مورد نظر را انتخاب کنید");
+
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🔐 کد گذاری 🔐"), new KeyboardButton("🔓 بازگشایی 🔓") };
+                        KeyboardButton[] row2 = { new KeyboardButton("❔ کد مورس چیست ❔") };
+                        KeyboardButton[] row5 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row5 };
+
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
+
+
+                    }
+                    else if (text.Contains("کد مورس چیست"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("روشی برای انتقال پیام و اطلاعات است که در آن از یک رشته نشانه‌های بلند و کوتاهِ استاندارد به نام خط و نقطه استفاده می‌شود و همچنین در تلگراف نیز بکار گرفته می‌شود.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("کد گذاری"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("پیام زیر را کپی و متن خود را جهت کد گذاری جایگزین عبارت 'متن مورد نظر' کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("کد مورسی:متن مورد نظر");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("کد مورسی:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("کد مورسی شما:");
+                        sb.AppendLine(mourse.MurosePersianGenerate(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("🔓 بازگشایی 🔓"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("پیام زیر را کپی و متن خود را جهت بازگشایی جایگزین عبارت 'متن مورد نظر' کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("کد مورسی جهت بازگشایی:متن مورد نظر");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("کد مورسی جهت بازگشایی:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("کد مورسی رمزنگاری شده شما: "+mourse.MurosePersianReverse(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    #endregion کد مورسی
+
+
+
                     ///<summary>
                     /// دانلودر
                     /// </summary>
@@ -270,6 +342,7 @@ namespace MyBot
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+
                     }
 
                     #endregion دانلودر
@@ -283,10 +356,10 @@ namespace MyBot
                         StringBuilder sb = new StringBuilder();
                         StringBuilder sb2 = new StringBuilder();
                         //sb.AppendLine(@"پیام زیر را کپی و لینک خورا جایگیزن کلمه 'متن جستجو' کنید و ارسال کنید.");
-                        sb.AppendLine("این امکان نیاز به تعمیر دارد 🔧");
+                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
-                        sb2.AppendLine("سرچ:متن جوستجو");
-                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                        //sb2.AppendLine("سرچ:متن جوستجو");
+                        //bot.SendTextMessageAsync(chatId, sb2.ToString());
                     }
 
                     //else if (text.Contains("سرچ:"))
@@ -316,7 +389,8 @@ namespace MyBot
                     else if (text.Contains("نیم بها:"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine($"لینک نیم بهای شما: {nimBaha.NimBaha(text)}");
+                        sb.AppendLine("لینک شما لینک دانلود نیست");
+                        //sb.AppendLine($"لینک نیم بهای شما: {nimBaha.NimBaha(text)}");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
                     }
 

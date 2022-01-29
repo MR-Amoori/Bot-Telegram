@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tools\Downloders\InstaDownloderApi.cs" />
+    <Compile Include="Tools\FindNumberApi.cs" />
     <Compile Include="Tools\NimBahaApi.cs" />
     <Compile Include="Tools\ConvertFinglishToPersianApi.cs" />
     <Compile Include="Ebrat\OghatShareeApi.cs" />

@@ -11,7 +11,8 @@ namespace Api_MyBot
     {
         public string MurosePersianGenerate(string text)
         {
-            string url = "http://api.codebazan.ir/mourse/?lang=fa&text=mamad" + text;
+            string textFinal = text.Remove(0, 9);
+            string url = "http://api.codebazan.ir/mourse/?lang=fa&text=" + textFinal;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
@@ -21,7 +22,8 @@ namespace Api_MyBot
 
         public string MuroseEnglishGenerate(string text)
         {
-            string url = "http://api.codebazan.ir/mourse/?lang=en&text=mamad" + text;
+            string textFinal = text.Remove(0, 8);
+            string url = "http://api.codebazan.ir/mourse/?lang=en&text=" + textFinal;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
@@ -31,7 +33,8 @@ namespace Api_MyBot
 
         public string MurosePersianReverse(string text)
         {
-            string url = "http://api.codebazan.ir/mourse/?lang=fa&mourse=" + text;
+            string textFinal = text.Remove(0, 22);
+            string url = "http://api.codebazan.ir/mourse/?lang=fa&mourse=" + textFinal;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
@@ -41,7 +44,8 @@ namespace Api_MyBot
 
         public string MuroseEnglishReverse(string text)
         {
-            string url = "http://api.codebazan.ir/mourse/?lang=en&mourse=" + text;
+            string textFinal = text.Remove(0, 21);
+            string url = "http://api.codebazan.ir/mourse/?lang=en&mourse=" + textFinal;
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
