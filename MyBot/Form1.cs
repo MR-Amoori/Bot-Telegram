@@ -222,7 +222,7 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
-                    else if (text.Contains("پشتیبانی"))
+                    else if (text.Contains("⛑ پشتیبانی ⛑"))
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("پیام خودرا مستقیما با فرمت زیر برای پشتیبانی بفرستید.");
@@ -976,6 +976,10 @@ namespace MyBot
             {
                 MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (IOException)
+            {
+                MessageBox.Show("صبر کنید تا پروسه ارسال فایل به اتمام برسد.", "خطا", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
+            }
         }
 
         /// <summary>
@@ -991,6 +995,10 @@ namespace MyBot
             {
                 FileStream imageFile = System.IO.File.Open(txt_FilePath.Text, System.IO.FileMode.Open);
                 bot.SendPhotoAsync(txt_Channel.Text, new FileToSend("Bot.png", imageFile), txt_Message.Text);
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("صبر کنید تا پروسه ارسال فایل به اتمام برسد.", "خطا", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
             }
             catch (ArgumentException)
             {
