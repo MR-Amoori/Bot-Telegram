@@ -12,8 +12,16 @@ namespace Api_MyBot
     {
         public string NimBaha(string link)
         {
-            link = link.Remove(0, 8);
-            string url = "https://Okaliptoos-api.ir/nim/index.php?link=" + link;
+            string linkk;
+            try
+            {
+                linkk = link.Remove(0, 8);
+            }
+            catch
+            {
+                return "نتیجه ای برای این شماره پیدا نکردیم.";
+            }
+            string url = "https://Okaliptoos-api.ir/nim/index.php?link=" + linkk;
             var client = new HttpClient();
             var serialize = client.GetStringAsync(url).Result;
             return serialize;

@@ -11,12 +11,23 @@ namespace Api_MyBot
     {
         public string PasswordGenerate()
         {
+            try
+            {
+
             string url = "http://api.codebazan.ir/password/?length=20";
             using (var client = new HttpClient())
             {
                 var serialize = client.GetStringAsync(url).Result;
                 return serialize;
             }
+
+            }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
     }
 }

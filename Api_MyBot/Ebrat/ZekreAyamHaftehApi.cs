@@ -11,12 +11,23 @@ namespace Api_MyBot
     {
         public string Zekr()
         {
-            string url = "http://api.codebazan.ir/zekr/";
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+
+                string url = "http://api.codebazan.ir/zekr/";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize;
+                }
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
+
         }
     }
 }

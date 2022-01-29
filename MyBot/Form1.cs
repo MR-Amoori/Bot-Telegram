@@ -19,7 +19,7 @@ using Api_MyBot;
 namespace MyBot
 {
     /// <summary>
-    /// /////////  لینک نیم بها تعمیر شود
+    /// /////////  راهنما
     /// </summary>
 
     public partial class Form1 : Form
@@ -41,6 +41,7 @@ namespace MyBot
 
         private static HadisBozorganApi hadis = new HadisBozorganApi();
         private static ZekreAyamHaftehApi zekre = new ZekreAyamHaftehApi();
+        private static OghatShareeApi oghatSharee = new OghatShareeApi();
 
         private static DateApi dateAp = new DateApi();
         private static ShotLinkGenerate shotLink = new ShotLinkGenerate();
@@ -48,7 +49,8 @@ namespace MyBot
         private static SearchInWikiPediaApi SearchInWikiPedia = new SearchInWikiPediaApi();
         private static NimBahaApi nimBaha = new NimBahaApi();
         private static MourseApi mourse = new MourseApi();
-        private static FindNumberApi findNumber= new FindNumberApi();
+        private static PasswordGenerateApi password = new PasswordGenerateApi();
+        private static FindNumberApi findNumber = new FindNumberApi();
 
         public Form1()
         {
@@ -93,6 +95,8 @@ namespace MyBot
                 btn_SendMessageToChannel.Enabled = true;
                 btn_SendPhotoToChannel.Enabled = true;
                 btn_SendVideoToChannel.Enabled = true;
+                txt_ChatId.Enabled = true;
+                btn_SendToChatId.Enabled = true;
             }));
 
             int offset = 0;
@@ -105,7 +109,7 @@ namespace MyBot
                 }
                 catch (AggregateException)
                 {
-                    MessageBox.Show("توکن اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("مشکل در اتصال به توکن", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     swBtn_StartOrStop.Invoke(new Action(() =>
                     {
@@ -126,7 +130,7 @@ namespace MyBot
                     var from = up.Message.From;
                     var chatId = up.Message.Chat.Id;
 
-                
+
 
 
                     /// <summary>
@@ -231,11 +235,101 @@ namespace MyBot
                         KeyboardButton[] row2 = { new KeyboardButton("🔗 کوتاه کننده لینک 🔗"), new KeyboardButton("📍 دانلودر 📍") };
                         KeyboardButton[] row3 = { new KeyboardButton("📎 ساخت لینک نیم بها 📎"), new KeyboardButton("✂️ کد مورسی ✂️") };
                         KeyboardButton[] row4 = { new KeyboardButton("🔒 پسورد ساز 🔒"), new KeyboardButton("🔎 سرچ مطلب 🔍") };
-                        KeyboardButton[] row5 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
-                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3, row4, row5 };
+                        KeyboardButton[] row5 = { new KeyboardButton("☎️ شماره یاب ☎️"), new KeyboardButton("📞 اطلاعات شماره 📞") };
+                        KeyboardButton[] row6 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2, row3, row4, row5, row6 };
 
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
+
+
+                    ///<summary>
+                    /// شماره تلفن
+                    /// </summary>
+                    #region شماره تلفن
+
+                    else if (text.Contains("☎️ شماره یاب ☎️"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("نوع جستجو را انتخاب کنید");
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("🆔 آیدی 🆔"), new KeyboardButton("🔢 آیدی عددی 🔢") };
+                        KeyboardButton[] row2 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1, row2 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, default, toolsKeyboard);
+                    }
+
+                    else if (text.Contains("🆔 آیدی 🆔"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("آیدی مورد نظر را طبق فرمت زیر ارسال کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("آیدی:@doitik");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("آیدی:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(findNumber.FindNumberByUserName(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    else if (text.Contains("🔢 آیدی عددی 🔢"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("آیدی عددی مورد نظر را طبق فرمت زیر ارسال کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("آیدی عددی:53521545");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("آیدی عددی:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(findNumber.FindNumberById(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    ///<summary>
+                    /// اطلاعات شماره
+                    /// </summary>
+                    else if (text.Contains("📞 اطلاعات شماره 📞"))
+                    {
+                        StringBuilder sb = new StringBuilder(); ;
+                        sb.AppendLine("شماره تلفن مورد نظر را طبق فرمت زیر ارسال کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("شماره تلفن شخص:09120000000");
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("شماره تلفن شخص:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(findNumber.InformationNumber(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+
+                    }
+
+                    #endregion شماره تلفن
+
+
+                    ///<summary>
+                    /// پسورد ساز
+                    /// </summary>
+                    #region پسورد ساز
+
+                    else if (text.Contains("پسورد ساز"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine($"رمز ساخته شده: {password.PasswordGenerate()}");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
+                    #endregion پسورد ساز
 
 
                     ///<summary>
@@ -296,7 +390,7 @@ namespace MyBot
                     else if (text.Contains("کد مورسی جهت بازگشایی:"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("کد مورسی رمزنگاری شده شما: "+mourse.MurosePersianReverse(text));
+                        sb.AppendLine("کد مورسی رمزنگاری شده شما: " + mourse.MurosePersianReverse(text));
                         bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
@@ -560,8 +654,21 @@ namespace MyBot
                     else if (text.Contains("اوقات شرعی"))
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        //   sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+
+                        sb.AppendLine("نام شهر مورد نظر را طبق فرمت زیر ارسال کنید.");
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.AppendLine("شهر:خرمشهر");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+                        bot.SendTextMessageAsync(chatId, sb2.ToString());
+                    }
+
+                    else if (text.Contains("شهر:"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(oghatSharee.Oghat(text));
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
 
                     #endregion روزانه
@@ -656,6 +763,8 @@ namespace MyBot
                 btn_SendMessageToChannel.Enabled = false;
                 btn_SendPhotoToChannel.Enabled = false;
                 btn_SendVideoToChannel.Enabled = false;
+                txt_ChatId.Enabled = false;
+                btn_SendToChatId.Enabled = false;
 
                 if (botThread == null)
                 {
@@ -855,6 +964,26 @@ namespace MyBot
             {
                 MessageBox.Show("فایلی انتخاب نکرده اید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txt_ChatId_MouseClick(object sender, MouseEventArgs e)
+        {
+            txt_ChatId.Text = "";
+        }
+
+        private void btn_SendToChatId_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var chattid = Convert.ToInt64(txt_ChatId.Text);
+            bot.SendTextMessageAsync(chattid,txt_Message.Text);
+            }
+            catch
+            {
+                MessageBox.Show("خطا در چت آیدی");
+
+            }
+
         }
     }
 }

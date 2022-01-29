@@ -38,6 +38,8 @@
             this.lbl_Status = new DevComponents.DotNetBar.LabelItem();
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.btn_About = new DevComponents.DotNetBar.ButtonItem();
+            this.labelItem2 = new DevComponents.DotNetBar.LabelItem();
+            this.progressBarItem1 = new DevComponents.DotNetBar.ProgressBarItem();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.dgvReport = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.ChatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,13 +61,15 @@
             this.txt_FilePath = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btn_Send = new DevComponents.DotNetBar.ButtonX();
             this.txt_Message = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelItem2 = new DevComponents.DotNetBar.LabelItem();
-            this.progressBarItem1 = new DevComponents.DotNetBar.ProgressBarItem();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_SendToChatId = new System.Windows.Forms.Button();
+            this.txt_ChatId = new System.Windows.Forms.TextBox();
             this.groupPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupPanel1
@@ -186,6 +190,25 @@
             this.btn_About.Text = " <b>About</b> ";
             this.btn_About.Click += new System.EventHandler(this.btn_About_Click);
             // 
+            // labelItem2
+            // 
+            this.labelItem2.ForeColor = System.Drawing.Color.White;
+            this.labelItem2.Name = "labelItem2";
+            this.labelItem2.Text = "||";
+            // 
+            // progressBarItem1
+            // 
+            // 
+            // 
+            // 
+            this.progressBarItem1.BackStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.progressBarItem1.ChunkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.progressBarItem1.ChunkColor2 = System.Drawing.Color.Lime;
+            this.progressBarItem1.ChunkGradientAngle = 0F;
+            this.progressBarItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.progressBarItem1.Name = "progressBarItem1";
+            this.progressBarItem1.RecentlyUsed = false;
+            // 
             // panelEx1
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
@@ -288,6 +311,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.btn_SendVideo);
             this.groupBox1.Controls.Add(this.btn_SendPhoto);
@@ -463,24 +487,39 @@
             this.txt_Message.Size = new System.Drawing.Size(482, 56);
             this.txt_Message.TabIndex = 0;
             // 
-            // labelItem2
+            // groupBox3
             // 
-            this.labelItem2.ForeColor = System.Drawing.Color.White;
-            this.labelItem2.Name = "labelItem2";
-            this.labelItem2.Text = "||";
+            this.groupBox3.Controls.Add(this.txt_ChatId);
+            this.groupBox3.Controls.Add(this.btn_SendToChatId);
+            this.groupBox3.Location = new System.Drawing.Point(12, 168);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 42);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Privet";
             // 
-            // progressBarItem1
+            // btn_SendToChatId
             // 
+            this.btn_SendToChatId.Enabled = false;
+            this.btn_SendToChatId.Location = new System.Drawing.Point(6, 13);
+            this.btn_SendToChatId.Name = "btn_SendToChatId";
+            this.btn_SendToChatId.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendToChatId.TabIndex = 0;
+            this.btn_SendToChatId.Text = "Send";
+            this.btn_SendToChatId.UseVisualStyleBackColor = true;
+            this.btn_SendToChatId.Click += new System.EventHandler(this.btn_SendToChatId_Click);
             // 
+            // txt_ChatId
             // 
-            // 
-            this.progressBarItem1.BackStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.progressBarItem1.ChunkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.progressBarItem1.ChunkColor2 = System.Drawing.Color.Lime;
-            this.progressBarItem1.ChunkGradientAngle = 0F;
-            this.progressBarItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
-            this.progressBarItem1.Name = "progressBarItem1";
-            this.progressBarItem1.RecentlyUsed = false;
+            this.txt_ChatId.BackColor = System.Drawing.SystemColors.Info;
+            this.txt_ChatId.Enabled = false;
+            this.txt_ChatId.Location = new System.Drawing.Point(87, 13);
+            this.txt_ChatId.Name = "txt_ChatId";
+            this.txt_ChatId.Size = new System.Drawing.Size(107, 21);
+            this.txt_ChatId.TabIndex = 1;
+            this.txt_ChatId.Text = "Chat ID";
+            this.txt_ChatId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_ChatId.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txt_ChatId_MouseClick);
             // 
             // Form1
             // 
@@ -507,6 +546,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -543,6 +584,9 @@
         private System.Windows.Forms.TextBox txt_Channel;
         private DevComponents.DotNetBar.LabelItem labelItem2;
         private DevComponents.DotNetBar.ProgressBarItem progressBarItem1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txt_ChatId;
+        private System.Windows.Forms.Button btn_SendToChatId;
     }
 }
 

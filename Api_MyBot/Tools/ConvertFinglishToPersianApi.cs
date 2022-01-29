@@ -12,13 +12,23 @@ namespace Api_MyBot
     {
         public string FinglishToPersian(string text)
         {
-            string url = "https://api.codebazan.ir/fintofa/?text="+text;
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                var deserialize = JsonConvert.DeserializeObject<Root>(serialize);
-                return deserialize.result.ToString();
+                string url = "https://api.codebazan.ir/fintofa/?text=" + text;
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    var deserialize = JsonConvert.DeserializeObject<Root>(serialize);
+                    return deserialize.result.ToString();
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Root

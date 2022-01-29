@@ -13,13 +13,23 @@ namespace Api_MyBot
     {
         public string LongDate()
         {
-            string url = "http://api.codebazan.ir/time-date/?td=all";
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result.ToString();
-                //  var deSerialize = JsonConvert.DeserializeObject<List<Root>>(serialize);
-                return serialize;
+
+                string url = "http://api.codebazan.ir/time-date/?td=all";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result.ToString();
+                    //  var deSerialize = JsonConvert.DeserializeObject<List<Root>>(serialize);
+                    return serialize;
+                }
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
     }
 }

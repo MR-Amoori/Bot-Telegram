@@ -12,14 +12,23 @@ namespace Api_MyBot
     {
         public string Download(string link)
         {
-
-            string url = "https://Okaliptoos-api.ir/instadown/index.php?url=" + link;
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                var deSerialize = JsonConvert.DeserializeObject<Roott>(serialize);
-                return deSerialize.Result.ToString();
+                string url = "https://Okaliptoos-api.ir/instadown/index.php?url=" + link;
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    var deSerialize = JsonConvert.DeserializeObject<Roott>(serialize);
+                    return deSerialize.Result.ToString();
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
 
         public class Resultbt

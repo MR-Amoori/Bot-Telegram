@@ -12,19 +12,29 @@ namespace Api_MyBot
     {
         public string ShortLink(string link)
         {
-            string url = "https://api.codebazan.ir/shortlink/index.php?url=" + link;
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                var deserialize = JsonConvert.DeserializeObject<Root>(serialize);
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"Link 1 : {deserialize.result.bitly}");
-                sb.AppendLine($"Link 2 : {deserialize.result.shortur}");
-                sb.AppendLine($"Link 3 : {deserialize.result.isgd}");
-                sb.AppendLine($"Link 4 : {deserialize.result.cutt}");
-                sb.AppendLine($"QR Code : {deserialize.result.qr}");
-                return sb.ToString();
+                string url = "https://api.codebazan.ir/shortlink/index.php?url=" + link;
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    var deserialize = JsonConvert.DeserializeObject<Root>(serialize);
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine($"Link 1 : {deserialize.result.bitly}");
+                    sb.AppendLine($"Link 2 : {deserialize.result.shortur}");
+                    sb.AppendLine($"Link 3 : {deserialize.result.isgd}");
+                    sb.AppendLine($"Link 4 : {deserialize.result.cutt}");
+                    sb.AppendLine($"QR Code : {deserialize.result.qr}");
+                    return sb.ToString();
+                }
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
+
         }
 
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);

@@ -11,42 +11,86 @@ namespace Api_MyBot
     {
         public string Jok()
         {
-            string url = "http://api.codebazan.ir/jok/";
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+                string url = "http://api.codebazan.ir/jok/";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize;
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
+
         }
 
         public string Khaterat()
         {
-            string url = "http://api.codebazan.ir/jok/khatere";
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+                string url = "http://api.codebazan.ir/jok/khatere";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize;
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
+
         }
 
         public string PaNaPa()
         {
-            string url = "http://api.codebazan.ir/jok/pa-na-pa/";
-            using (var client = new HttpClient())
+
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+                string url = "http://api.codebazan.ir/jok/pa-na-pa/";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize;
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
 
         public string AlakiMasalan()
         {
-            string url = "http://api.codebazan.ir/jok/alaki-masalan/";
-            using (var client = new HttpClient())
+
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize;
+                string url = "http://api.codebazan.ir/jok/alaki-masalan/";
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize;
+                }
+
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
 
     }

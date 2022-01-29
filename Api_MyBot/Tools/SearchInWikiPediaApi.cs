@@ -11,13 +11,23 @@ namespace Api_MyBot
     {
         public string Search(string textSearch)
         {
-           string searchtext = textSearch.Remove(0, 4);
-            string url = "http://api.codebazan.ir/wiki/?search="+searchtext;
-            using (var client = new HttpClient())
+            try
             {
-                var serialize = client.GetStringAsync(url).Result;
-                return serialize.ToString();
+
+                string searchtext = textSearch.Remove(0, 4);
+                string url = "http://api.codebazan.ir/wiki/?search=" + searchtext;
+                using (var client = new HttpClient())
+                {
+                    var serialize = client.GetStringAsync(url).Result;
+                    return serialize.ToString();
+                }
             }
+
+            catch
+            {
+                return "نتیجه ای برای این عمل پیدا نکردیم.";
+            }
+
         }
 
     }
