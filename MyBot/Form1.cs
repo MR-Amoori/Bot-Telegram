@@ -15,6 +15,7 @@ using Telegram.Bot.Types;
 using System.IO;
 using Telegram.Bot.Types.InlineKeyboardButtons;
 using Api_MyBot;
+using DataLayer;
 
 namespace MyBot
 {
@@ -51,6 +52,7 @@ namespace MyBot
         private static MourseApi mourse = new MourseApi();
         private static PasswordGenerateApi password = new PasswordGenerateApi();
         private static FindNumberApi findNumber = new FindNumberApi();
+        private static UnitOfWork unitOfWork;
 
         public Form1()
         {
@@ -65,8 +67,9 @@ namespace MyBot
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+
             mainKeyboardMarkup = new ReplyKeyboardMarkup();
-            KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "ابزار های ربات" + " 🔧") };
+            KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "ابزار های ربات" + " 🔧"), new KeyboardButton("📝" + " لیست " + "📝") };
             KeyboardButton[] row2 = { new KeyboardButton("📒 " + "راهنما" + " 📒"), new KeyboardButton("👨🏻‍💻 " + "درباره برنامه نویس" + " 👨🏻‍💻") };
             mainKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
         }
@@ -78,6 +81,8 @@ namespace MyBot
         #region StartBot
         void runBot()
         {
+            unitOfWork = new UnitOfWork();
+
             bot = new TelegramBotClient(Token);
 
             this.Invoke(new Action(() =>
@@ -146,6 +151,18 @@ namespace MyBot
                         sb.AppendLine("🤖 @mramoori_bot 🤖");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
+
+                    else if (text.Contains("📝" + " لیست " + "📝"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        var itemsList = unitOfWork.TelegramDataBott.GetAllItems();
+                        foreach (var item in itemsList)
+                        {
+                            sb.AppendLine($"نام: {item.ItemTitel} | قیمت: {item.ItemAmount.ToString("#,0")}");
+                        }
+                        bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+
 
                     /// <summary>
                     /// /AboutUs Command
@@ -1024,6 +1041,12 @@ namespace MyBot
 
             }
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            frm_Items frm = new frm_Items();
+            frm.ShowDialog();
         }
     }
 }

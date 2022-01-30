@@ -13,8 +13,8 @@ namespace DataLayer
         /// تعریف در کانستراکتور برای گرفتن یک نمونه از دیتابیس در زمان نمونه سازی
         /// </summary>
         #region Ctor
-        TelegramBot_DBEntities db;
-        public TelegramDataBot(TelegramBot_DBEntities context)
+        TelegramBot_DBEntitiess db;
+        public TelegramDataBot(TelegramBot_DBEntitiess context)
         {
             db = context;
         }

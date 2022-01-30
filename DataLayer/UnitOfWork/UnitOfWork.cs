@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class UnitOfWork
+    public class UnitOfWork : IDisposable
     {
-        TelegramBot_DBEntities db = new TelegramBot_DBEntities(); // DataBase
+        TelegramBot_DBEntitiess db = new TelegramBot_DBEntitiess(); // DataBase
 
         private TelegramDataBot _TelegramDataBot;
         public TelegramDataBot TelegramDataBott
@@ -21,6 +21,15 @@ namespace DataLayer
                 }
                 return _TelegramDataBot;
             }
+        }
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }
