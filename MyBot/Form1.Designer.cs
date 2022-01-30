@@ -49,6 +49,9 @@
             this.MessageId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_ChatId = new System.Windows.Forms.TextBox();
+            this.btn_SendToChatId = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_SendVideoToChannel = new DevComponents.DotNetBar.ButtonX();
             this.btn_SendPhotoToChannel = new DevComponents.DotNetBar.ButtonX();
@@ -61,15 +64,15 @@
             this.txt_FilePath = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btn_Send = new DevComponents.DotNetBar.ButtonX();
             this.txt_Message = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btn_SendToChatId = new System.Windows.Forms.Button();
-            this.txt_ChatId = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupPanel1
@@ -158,7 +161,7 @@
             this.btn_About,
             this.labelItem2,
             this.progressBarItem1});
-            this.metroStatusBar1.Location = new System.Drawing.Point(0, 533);
+            this.metroStatusBar1.Location = new System.Drawing.Point(0, 534);
             this.metroStatusBar1.Name = "metroStatusBar1";
             this.metroStatusBar1.Size = new System.Drawing.Size(595, 22);
             this.metroStatusBar1.TabIndex = 1;
@@ -311,6 +314,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.btn_SendVideo);
@@ -327,6 +331,40 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Send Message";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_ChatId);
+            this.groupBox3.Controls.Add(this.btn_SendToChatId);
+            this.groupBox3.Location = new System.Drawing.Point(12, 164);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 46);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Privet";
+            // 
+            // txt_ChatId
+            // 
+            this.txt_ChatId.BackColor = System.Drawing.SystemColors.Info;
+            this.txt_ChatId.Enabled = false;
+            this.txt_ChatId.Location = new System.Drawing.Point(87, 16);
+            this.txt_ChatId.Name = "txt_ChatId";
+            this.txt_ChatId.Size = new System.Drawing.Size(107, 21);
+            this.txt_ChatId.TabIndex = 1;
+            this.txt_ChatId.Text = "Chat ID";
+            this.txt_ChatId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_ChatId.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txt_ChatId_MouseClick);
+            // 
+            // btn_SendToChatId
+            // 
+            this.btn_SendToChatId.Enabled = false;
+            this.btn_SendToChatId.Location = new System.Drawing.Point(6, 16);
+            this.btn_SendToChatId.Name = "btn_SendToChatId";
+            this.btn_SendToChatId.Size = new System.Drawing.Size(75, 21);
+            this.btn_SendToChatId.TabIndex = 0;
+            this.btn_SendToChatId.Text = "Send";
+            this.btn_SendToChatId.UseVisualStyleBackColor = true;
+            this.btn_SendToChatId.Click += new System.EventHandler(this.btn_SendToChatId_Click);
             // 
             // groupBox2
             // 
@@ -487,46 +525,31 @@
             this.txt_Message.Size = new System.Drawing.Size(482, 56);
             this.txt_Message.TabIndex = 0;
             // 
-            // groupBox3
+            // groupBox4
             // 
-            this.groupBox3.Controls.Add(this.txt_ChatId);
-            this.groupBox3.Controls.Add(this.btn_SendToChatId);
-            this.groupBox3.Location = new System.Drawing.Point(12, 168);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 42);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Privet";
+            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Location = new System.Drawing.Point(218, 164);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(87, 46);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "DataBase";
             // 
-            // btn_SendToChatId
+            // button1
             // 
-            this.btn_SendToChatId.Enabled = false;
-            this.btn_SendToChatId.Location = new System.Drawing.Point(6, 13);
-            this.btn_SendToChatId.Name = "btn_SendToChatId";
-            this.btn_SendToChatId.Size = new System.Drawing.Size(75, 21);
-            this.btn_SendToChatId.TabIndex = 0;
-            this.btn_SendToChatId.Text = "Send";
-            this.btn_SendToChatId.UseVisualStyleBackColor = true;
-            this.btn_SendToChatId.Click += new System.EventHandler(this.btn_SendToChatId_Click);
-            // 
-            // txt_ChatId
-            // 
-            this.txt_ChatId.BackColor = System.Drawing.SystemColors.Info;
-            this.txt_ChatId.Enabled = false;
-            this.txt_ChatId.Location = new System.Drawing.Point(87, 13);
-            this.txt_ChatId.Name = "txt_ChatId";
-            this.txt_ChatId.Size = new System.Drawing.Size(107, 21);
-            this.txt_ChatId.TabIndex = 1;
-            this.txt_ChatId.Text = "Chat ID";
-            this.txt_ChatId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_ChatId.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txt_ChatId_MouseClick);
+            this.button1.Location = new System.Drawing.Point(6, 17);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Add Item";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(595, 555);
+            this.ClientSize = new System.Drawing.Size(595, 556);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.metroStatusBar1);
@@ -544,10 +567,11 @@
             this.panelEx1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -587,6 +611,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txt_ChatId;
         private System.Windows.Forms.Button btn_SendToChatId;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button1;
     }
 }
 
