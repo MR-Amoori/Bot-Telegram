@@ -13,10 +13,10 @@ namespace DataLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TelegramBot_DBEntitiess : DbContext
+    public partial class TelegramBot_DBEntitiesss : DbContext
     {
-        public TelegramBot_DBEntitiess()
-            : base("name=TelegramBot_DBEntitiess")
+        public TelegramBot_DBEntitiesss()
+            : base("name=TelegramBot_DBEntitiesss")
         {
         }
     

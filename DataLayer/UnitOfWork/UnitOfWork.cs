@@ -8,7 +8,7 @@ namespace DataLayer
 {
     public class UnitOfWork : IDisposable
     {
-        TelegramBot_DBEntitiess db = new TelegramBot_DBEntitiess(); // DataBase
+        TelegramBot_DBEntitiesss db = new TelegramBot_DBEntitiesss(); // DataBase
 
         private TelegramDataBot _TelegramDataBot;
         public TelegramDataBot TelegramDataBott
