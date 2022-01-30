@@ -42,7 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtItemTitelForInsert = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_InsertItem = new System.Windows.Forms.Button();
             this.txtAmountForUp = new System.Windows.Forms.NumericUpDown();
             this.txtAmountForInsert = new System.Windows.Forms.NumericUpDown();
             this.btnDeleteItem = new System.Windows.Forms.Button();
@@ -84,6 +84,7 @@
             this.dgvItems.ReadOnly = true;
             this.dgvItems.Size = new System.Drawing.Size(251, 202);
             this.dgvItems.TabIndex = 0;
+            this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
             // 
             // ItemId
             // 
@@ -149,17 +150,19 @@
             // 
             // btnUpdateItem
             // 
+            this.btnUpdateItem.Enabled = false;
             this.btnUpdateItem.Location = new System.Drawing.Point(114, 80);
             this.btnUpdateItem.Name = "btnUpdateItem";
             this.btnUpdateItem.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateItem.TabIndex = 2;
             this.btnUpdateItem.Text = "Update";
             this.btnUpdateItem.UseVisualStyleBackColor = true;
+            this.btnUpdateItem.Click += new System.EventHandler(this.btnUpdateItem_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.txtAmountForInsert);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btn_InsertItem);
             this.groupBox3.Controls.Add(this.txtItemTitelForInsert);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label4);
@@ -196,15 +199,15 @@
             this.txtItemTitelForInsert.TabIndex = 1;
             this.txtItemTitelForInsert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button1
+            // btn_InsertItem
             // 
-            this.button1.Location = new System.Drawing.Point(117, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Insert";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_InsertItem.Location = new System.Drawing.Point(117, 74);
+            this.btn_InsertItem.Name = "btn_InsertItem";
+            this.btn_InsertItem.Size = new System.Drawing.Size(75, 23);
+            this.btn_InsertItem.TabIndex = 2;
+            this.btn_InsertItem.Text = "Insert";
+            this.btn_InsertItem.UseVisualStyleBackColor = true;
+            this.btn_InsertItem.Click += new System.EventHandler(this.btn_InsertItem_Click);
             // 
             // txtAmountForUp
             // 
@@ -217,6 +220,7 @@
             this.txtAmountForUp.Name = "txtAmountForUp";
             this.txtAmountForUp.Size = new System.Drawing.Size(176, 21);
             this.txtAmountForUp.TabIndex = 3;
+            this.txtAmountForUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtAmountForInsert
             // 
@@ -229,6 +233,7 @@
             this.txtAmountForInsert.Name = "txtAmountForInsert";
             this.txtAmountForInsert.Size = new System.Drawing.Size(176, 21);
             this.txtAmountForInsert.TabIndex = 3;
+            this.txtAmountForInsert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnDeleteItem
             // 
@@ -294,7 +299,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown txtAmountForInsert;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_InsertItem;
         private System.Windows.Forms.TextBox txtItemTitelForInsert;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

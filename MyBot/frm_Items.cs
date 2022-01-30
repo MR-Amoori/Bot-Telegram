@@ -25,13 +25,6 @@ namespace MyBot
             BindGrid();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            unitOfWork.TelegramDataBott.InsertItem(new Items_TB() { ItemTitel = txtItemTitelForInsert.Text, ItemAmount = (int)txtAmountForInsert.Value });
-            unitOfWork.Save();
-            BindGrid();
-        }
-
         void BindGrid()
         {
             dgvItems.DataSource = unitOfWork.TelegramDataBott.GetAllItems();
@@ -44,18 +37,39 @@ namespace MyBot
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-            string nameItem = dgvItems.CurrentRow.Cells[1].ToString();
+            string nameItem = dgvItems.CurrentRow.Cells[1].Value.ToString();
             int id = (int)dgvItems.CurrentRow.Cells[0].Value;
 
-            if (dgvItems.CurrentRow!=null)
+            if (dgvItems.CurrentRow != null)
             {
-                if (MessageBox.Show($"از حذف {nameItem} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)==DialogResult.Yes)
+                if (MessageBox.Show($"از حذف {nameItem} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     unitOfWork.TelegramDataBott.DeleteItem(id);
                     unitOfWork.Save();
                     BindGrid();
-                } 
+                }
             }
+        }
+
+        private void btn_InsertItem_Click(object sender, EventArgs e)
+        {
+            unitOfWork.TelegramDataBott.InsertItem(new Items_TB() { ItemTitel = txtItemTitelForInsert.Text, ItemAmount = (int)txtAmountForInsert.Value });
+            unitOfWork.Save();
+            BindGrid();
+        }
+
+        private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtItemTitelForUp.Text = dgvItems.CurrentRow.Cells[1].Value.ToString();
+            txtAmountForUp.Value = (int)dgvItems.CurrentRow.Cells[2].Value;
+        }
+
+        private void btnUpdateItem_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvItems.CurrentRow.Cells[0].Value;
+            bool iss = unitOfWork.TelegramDataBott.UpdateItem(new Items_TB() { ItemID = id, ItemTitel = txtItemTitelForUp.Text, ItemAmount = (int)txtAmountForUp.Value });
+            unitOfWork.Save();
+            BindGrid();
         }
     }
 }
