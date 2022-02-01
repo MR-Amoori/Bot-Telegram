@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api_MyBot", "Api_MyBot\Api_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{F4440B74-D578-44A8-9063-1E83E8FC7BA2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Telegram Bot Management", "Telegram Bot Management\Telegram Bot Management.vdproj", "{EF05B49A-00F4-48B7-B398-D6E1BC1B5551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{F4440B74-D578-44A8-9063-1E83E8FC7BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4440B74-D578-44A8-9063-1E83E8FC7BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4440B74-D578-44A8-9063-1E83E8FC7BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF05B49A-00F4-48B7-B398-D6E1BC1B5551}.Debug|Any CPU.ActiveCfg = Debug
+		{EF05B49A-00F4-48B7-B398-D6E1BC1B5551}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

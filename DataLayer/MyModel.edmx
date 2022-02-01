@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TelegramBotDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TelegramBotDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Items_TB">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -16,33 +16,34 @@
         <EntityContainer Name="TelegramBotDataModelStoreContainer">
           <EntitySet Name="Items_TB" EntityType="Self.Items_TB" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TelegramBotDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TelegramBot_DBEntitiesss" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Items_TB" EntityType="TelegramBotDataModel.Items_TB" />
-        </EntityContainer>
         <EntityType Name="Items_TB">
           <Key>
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemTitel" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ItemTitel" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ItemAmount" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="TelegramBot_DBEntitiesss" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Items_TB" EntityType="Self.Items_TB" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TelegramBotDataModelStoreContainer" CdmEntityContainer="TelegramBot_DBEntitiesss" >
+        <EntityContainerMapping StorageEntityContainer="TelegramBotDataModelStoreContainer" CdmEntityContainer="TelegramBot_DBEntitiesss">
           <EntitySetMapping Name="Items_TB">
             <EntityTypeMapping TypeName="TelegramBotDataModel.Items_TB">
               <MappingFragment StoreEntitySet="Items_TB">
-                <ScalarProperty Name="ItemAmount" ColumnName="ItemAmount" />
-                <ScalarProperty Name="ItemTitel" ColumnName="ItemTitel" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemTitel" ColumnName="ItemTitel" />
+                <ScalarProperty Name="ItemAmount" ColumnName="ItemAmount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
