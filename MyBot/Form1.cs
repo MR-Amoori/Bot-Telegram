@@ -16,6 +16,7 @@ using System.IO;
 using Telegram.Bot.Types.InlineKeyboardButtons;
 using Api_MyBot;
 using DataLayer;
+using Api_MyBot.Tools.Downloders;
 
 namespace MyBot
 {
@@ -47,6 +48,7 @@ namespace MyBot
         private static DateApi dateAp = new DateApi();
         private static ShotLinkGenerate shotLink = new ShotLinkGenerate();
         private static InstaDownloderApi instaDownloder = new InstaDownloderApi();
+        private static YoutubeDownloaderApi youtubeDownloader = new YoutubeDownloaderApi();
         private static SearchInWikiPediaApi SearchInWikiPedia = new SearchInWikiPediaApi();
         private static NimBahaApi nimBaha = new NimBahaApi();
         private static MourseApi mourse = new MourseApi();
@@ -69,7 +71,7 @@ namespace MyBot
         {
 
             mainKeyboardMarkup = new ReplyKeyboardMarkup();
-            KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "ابزار های ربات" + " 🔧"), new KeyboardButton("📝" + " لیست " + "📝") };
+            KeyboardButton[] row1 = { new KeyboardButton("🔧 " + "ابزار های ربات" + " 🔧")/*, new KeyboardButton("📝" + " لیست " + "📝")*/ };
             KeyboardButton[] row2 = { new KeyboardButton("📒 " + "راهنما" + " 📒"), new KeyboardButton("👨🏻‍💻 " + "درباره برنامه نویس" + " 👨🏻‍💻") };
             mainKeyboardMarkup.Keyboard = new KeyboardButton[][] { row1, row2 };
         }
@@ -131,7 +133,7 @@ namespace MyBot
                     if (up.Message == null)
                         continue;
 
-                    var text = up.Message.Text.ToLower();
+                    var text = up.Message.Text;
                     var from = up.Message.From;
                     var chatId = up.Message.Chat.Id;
 
@@ -152,16 +154,16 @@ namespace MyBot
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, mainKeyboardMarkup);
                     }
 
-                    else if (text.Contains("📝" + " لیست " + "📝"))
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        var itemsList = unitOfWork.TelegramDataBott.GetAllItems();
-                        foreach (var item in itemsList)
-                        {
-                            sb.AppendLine($"نام: {item.ItemTitel} | قیمت: {item.ItemAmount.ToString("#,0")}");
-                        }
-                        bot.SendTextMessageAsync(chatId, sb.ToString());
-                    }
+                    //else if (text.Contains("📝" + " لیست " + "📝"))
+                    //{
+                    //    StringBuilder sb = new StringBuilder();
+                    //    var itemsList = unitOfWork.TelegramDataBott.GetAllItems();
+                    //    foreach (var item in itemsList)
+                    //    {
+                    //        sb.AppendLine($"نام: {item.ItemTitel} | قیمت: {item.ItemAmount.ToString("#,0")}");
+                    //    }
+                    //    bot.SendTextMessageAsync(chatId, sb.ToString());
+                    //}
 
 
                     /// <summary>
@@ -482,10 +484,24 @@ namespace MyBot
 
                     else if (text.Contains("یوتیوب"))
                     {
+                        //StringBuilder sb = new StringBuilder();
+                        //sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        //bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
+
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("این قابلیت نیاز به تعمیر دارد 🪒");
+                        sb.AppendLine("لینک پست مورد نظر را ارسال کنید 🔗");
                         bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0);
 
+                    }
+
+                    else if (text.Contains("https://youtu.be/"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine($"لینک دانلود : {youtubeDownloader.Download(text)}");
+                        ReplyKeyboardMarkup toolsKeyboard = new ReplyKeyboardMarkup();
+                        KeyboardButton[] row1 = { new KeyboardButton("◀️ " + "بازگشت" + " ◀️") };
+                        toolsKeyboard.Keyboard = new KeyboardButton[][] { row1 };
+                        bot.SendTextMessageAsync(chatId, sb.ToString(), ParseMode.Html, default, default, 0, toolsKeyboard);
                     }
 
                     #endregion دانلودر

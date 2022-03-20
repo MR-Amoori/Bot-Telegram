@@ -19,7 +19,7 @@ namespace Api_MyBot
                 {
                     var serialize = client.GetStringAsync(url).Result;
                     var deSerialize = JsonConvert.DeserializeObject<Roott>(serialize);
-                    return deSerialize.Result.ToString();
+                    return deSerialize.Result.Download.ToString();
                 }
 
             }
